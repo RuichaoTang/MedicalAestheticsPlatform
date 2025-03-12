@@ -1,0 +1,25 @@
+{
+  "name": "medicalaestheticsplatform",
+  "version": "1.0.0",
+  "description": "It is a website aiming to offer transparent rating/prices of medical aesthetic services.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RuichaoTang/MedicalAestheticsPlatform.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RuichaoTang/MedicalAestheticsPlatform/issues"
+  },
+  "homepage": "https://github.com/RuichaoTang/MedicalAestheticsPlatform#readme",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}
