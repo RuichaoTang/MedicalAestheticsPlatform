@@ -20,9 +20,9 @@ import {
 import { ChevronDownIcon} from '@heroicons/react/20/solid'
 
 const products = [
-  { name: 'Treatments', description: 'Your customers’ data will be safe and secure', href: '/treatments' },
-  { name: 'Clinics', description: 'Get a better understanding of your traffic', href: '/clinics' },
-  { name: 'Doctors', description: 'Speak directly to your customers', href: '/doctors'},
+  { name: 'Treatments', description: 'Browse all the treatments in one page', href: '/treatments' },
+  { name: 'Clinics', description: 'Locate a trust worthy medical aesthetic center', href: '/clinics' },
+  { name: 'Doctors', description: 'Find a reputable doctor or operator', href: '/doctors'},
 ]
 
 
@@ -34,7 +34,7 @@ export default function Example() {
     <header className="bg-white dark:bg-gray-900">
       <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
+          <a href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Hydrogen Aesthetics</span>
             <span className="text-xl font-serif font-light text-slate-700">Hydrogen</span>
           </a>
@@ -81,14 +81,14 @@ export default function Example() {
               
             </PopoverPanel>
           </Popover>
-          <a href="#" className="text-sm/6 font-semibold text-gray-900">
+          <a href="/" className="text-sm/6 font-semibold text-gray-900">
             Home
           </a>
-          {user? <a href="#" className="text-sm/6 font-semibold text-gray-900">
+          {user? <a href="/me" className="text-sm/6 font-semibold text-gray-900">
             Me
           </a> : null}
           
-          <a href="#" className="text-sm/6 font-semibold text-gray-900">
+          <a href="/about" className="text-sm/6 font-semibold text-gray-900">
             About
           </a>
         </PopoverGroup>
@@ -97,7 +97,7 @@ export default function Example() {
           <a href="#" className="text-sm/6 font-semibold text-gray-900">
             Log out <span aria-hidden="true">&rarr;</span>
           </a> :
-          <a href="#" className="text-sm/6 font-semibold text-gray-900">
+          <a href="/login" className="text-sm/6 font-semibold text-gray-900">
             Log in <span aria-hidden="true">&rarr;</span>
           </a>
           }
@@ -107,7 +107,7 @@ export default function Example() {
         <div className="fixed inset-0 z-10" />
         <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <a href="#" className="-m-1.5 p-1.5">
+            <a href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Hydrogen Aesthetics</span>
             <span className="text-xl items-center font-serif font-light text-slate-700">Hydrogen</span>
             </a>
@@ -143,20 +143,20 @@ export default function Example() {
                 </Disclosure>
                 
                 <a
-                  href="#"
+                  href="/"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                 >
                   Home
                 </a>
                 {user ? <a
-                  href="#"
+                  href="/me"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                 >
                   Me
                 </a> : null}
                 
                 <a
-                  href="#"
+                  href="/about"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                 >
                   About
@@ -170,7 +170,7 @@ export default function Example() {
                 >
                   Log out
                 </a> : <a
-                  href="#"
+                  href="/login"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                 >
                   Log in
