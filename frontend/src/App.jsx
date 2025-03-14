@@ -12,6 +12,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import NotFound from "./pages/NotFound";
 
 function App() {
+  const isAuthenticated = false;
   return (
     <>
       <Router>
@@ -24,7 +25,7 @@ function App() {
           <Route path="/treatments" element={<Treatments />} />
           <Route path="/treatment/:treatmentId" element={<Treatment />} />
           <Route path="/doctors" element={<Doctors />} />
-          <Route element={<PrivateRoute />}>
+          <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
             <Route path="/me/:userId" element={<Me />} />
           </Route>
           <Route path="*" element={<NotFound />} />

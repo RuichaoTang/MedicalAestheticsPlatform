@@ -15,7 +15,7 @@ export default function ClinicCard({ clinic }) {
     <>
       <article
         key={clinic.clinic_id}
-        className="flex max-w-xl flex-col items-start justify-between shadow-md rounded-md p-6"
+        className="flex max-w-xl flex-col items-start justify-between p-6"
       >
         <div className="group relative">
           <h3 className="mt-3 text-lg/6 font-semibold text-gray-900 group-hover:text-gray-600 font-serif">
