@@ -4,7 +4,8 @@ const people = [
   {
     name: "Ruichao Tang",
     role: "Software Engineer",
-    imageUrl: "../public/IMG_9909 2.jpg",
+    imageUrl:
+      "https://github.com/RuichaoTang/MedicalAestheticsPlatform/blob/main/frontend/public/IMG_9909%202.jpg?raw=true",
     link: "https://www.linkedin.com/in/ruichaotang",
   },
   // More people...
