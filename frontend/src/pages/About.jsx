@@ -46,7 +46,7 @@ const people = [
       <div className="bg-white py-24 sm:py-32">
         <div className="mx-auto grid max-w-7xl gap-20 px-6 lg:px-8 xl:grid-cols-3">
           <div className="max-w-xl">
-            <h2 className="text-xl font-semibold tracking-tight  text-gray-900 sm:text-2xl mb-6">
+            <h2 className="text-xl font-semibold tracking-tight  text-gray-900 sm:text-2xl mb-4">
               Get in touch
             </h2>
           </div>
