@@ -2,7 +2,7 @@ import Header from '../components/Header';
 import { Field, Label, Switch } from '@headlessui/react'
 import { Link } from 'react-router-dom';
 
-export default function Example() {
+export default function Login() {
 
   return (
     <>

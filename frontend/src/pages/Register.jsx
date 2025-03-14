@@ -2,7 +2,7 @@ import Header from '../components/Header';
 import { useState } from 'react'
 import { Field, Label, Switch } from '@headlessui/react'
 
-export default function Example() {
+export default function Register() {
   const [agreed, setAgreed] = useState(false)
 
   return (
