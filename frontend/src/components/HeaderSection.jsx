@@ -44,9 +44,9 @@ export default function HeaderSection() {
               Hydrogen
             </span>
             <br />
-            Aesthetics Platform
+            Medical Aesthetics Platform
           </h2>
-          <p className="mt-8 text-lg font-medium text-pretty text-gray-300 sm:text-xl/8">
+          <p className="mt-8 text-xl font-medium text-pretty text-gray-300 sm:text-xl/8">
             A one-stop solution where you can compare prices, browse procedure
             details, and make informed decisions with ease.
           </p>
