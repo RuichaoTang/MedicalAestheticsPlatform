@@ -46,6 +46,7 @@ export function AuthProvider({ children }) {
     try {
       // 这里替换为真实的 API 调用
       const user = await fakeAuthAPI(credentials);
+
       dispatch({ type: "LOGIN_SUCCESS", payload: user });
     } catch (error) {
       dispatch({ type: "AUTH_ERROR", payload: error.message });

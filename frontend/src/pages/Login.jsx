@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Field, Label, Switch } from "@headlessui/react";
 import { Link } from "react-router-dom";
+// import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -39,6 +40,7 @@ export default function Login() {
         console.log("data.message", data.message);
         setError(data.message);
         setLoading(false);
+
         return;
       }
 
@@ -118,6 +120,7 @@ export default function Login() {
           <div className="mt-10">
             <button
               type="submit"
+              disabled={loading}
               className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               {loading ? "LOGGING IN..." : "LOG IN"}
