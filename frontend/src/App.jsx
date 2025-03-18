@@ -10,27 +10,31 @@ import Treatment from "./pages/Treatment";
 import Doctors from "./pages/Doctors";
 import PrivateRoute from "./components/PrivateRoute";
 import NotFound from "./pages/NotFound";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   const isAuthenticated = false;
+
   return (
     <>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/clinics" element={<Clinics />} />
-          <Route path="/treatments" element={<Treatments />} />
-          <Route path="/treatment/:treatmentId" element={<Treatment />} />
-          <Route path="/doctors" element={<Doctors />} />
-          <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
-            <Route path="/me/:userId" element={<Me />} />
-          </Route>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Router>
+      <AuthProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/clinics" element={<Clinics />} />
+            <Route path="/treatments" element={<Treatments />} />
+            <Route path="/treatment/:treatmentId" element={<Treatment />} />
+            <Route path="/doctors" element={<Doctors />} />
+            <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
+              <Route path="/me/:userId" element={<Me />} />
+            </Route>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Router>
+      </AuthProvider>
     </>
   );
 }
