@@ -109,16 +109,30 @@ export const checkLogin = async (req, res) => {
   const token = req.cookies.token;
 
   if (!token) {
-    return res.send({ loggedIn: false });
+    console.log("No token found");
+    return res.send({ user: null });
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user_decoded = jwt.verify(token, process.env.JWT_SECRET);
+    console.log("Decoded token:", user_decoded);
 
-    res.send({ loggedIn: true, user: decoded });
+    const user_id = new ObjectId(user_decoded.id);
+    const userCollection = client.db("data").collection("users");
+    const userData = await userCollection.findOne({
+      _id: user_id,
+    });
+
+    if (!userData) {
+      return res.status(204).send();
+    }
+    const { firstName, lastName, email } = userData;
+    const user = { firstName, lastName, email };
+    console.log("User:", { firstName, lastName, email });
+    res.send({ user });
   } catch (err) {
     res.clearCookie("token");
-    res.send({ loggedIn: false });
+    return res.status(204).send();
   }
 };
 

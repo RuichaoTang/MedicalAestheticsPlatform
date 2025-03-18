@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Dialog,
   DialogPanel,
@@ -36,12 +37,15 @@ const products = [
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const user = useAuth();
   const dispatch = useAuthDispatch();
-  console.log("user", user);
+  console.log("user reducer", user);
 
   const handleLogOut = () => {
+    const isConfirmed = window.confirm("Log Out？");
+    if (!isConfirmed) return;
     console.log("Logging out...");
     const response = fetch("/api/users/logout", {
       method: "POST",
@@ -51,7 +55,11 @@ export default function Header() {
     });
     if (response.ok) {
       console.log("Logged out successfully");
+
       dispatch({ type: "LOGOUT" });
+      navigate("/");
+    } else {
+      dispatch({ type: "AUTH_ERROR" });
     }
   };
 
@@ -117,21 +125,24 @@ export default function Header() {
           <a href="/" className="text-sm/6 font-semibold text-gray-900">
             Home
           </a>
-          {user.isAuthenticated ? (
-            <a href="/me" className="text-sm/6 font-semibold text-gray-900">
-              Me
-            </a>
-          ) : null}
 
           <a href="/about" className="text-sm/6 font-semibold text-gray-900">
             About
           </a>
         </PopoverGroup>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end gap-4">
           {user.isAuthenticated ? (
-            <a href="#" className="text-sm/6 font-semibold text-gray-900">
-              Log out <span aria-hidden="true">&rarr;</span>
-            </a>
+            <>
+              <a href="/me" className="text-sm/6 font-semibold text-gray-900">
+                Hi! {user.user.firstName}.
+              </a>
+              <button
+                onClick={handleLogOut}
+                className="text-sm/6 font-semibold text-gray-900"
+              >
+                Log out <span aria-hidden="true">&rarr;</span>
+              </button>
+            </>
           ) : (
             <a href="/login" className="text-sm/6 font-semibold text-gray-900">
               Log in <span aria-hidden="true">&rarr;</span>
@@ -198,7 +209,7 @@ export default function Header() {
                     href="/me"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                   >
-                    Me
+                    Hi! {user.firstName}!
                   </a>
                 ) : null}
 
@@ -213,7 +224,7 @@ export default function Header() {
                 {user.isAuthenticated ? (
                   <>
                     <p className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900">
-                      {user.user.firstName}
+                      {user.firstName}
                     </p>
                     <button
                       onClick={handleLogOut}

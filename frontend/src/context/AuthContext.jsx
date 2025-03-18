@@ -1,4 +1,4 @@
-import { createContext, useReducer, useContext } from "react";
+import { createContext, useReducer, useContext, useEffect } from "react";
 
 // create Context
 const AuthContext = createContext(null);
@@ -6,6 +6,27 @@ const AuthDispatchContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [userState, userDispatch] = useReducer(authReducer, initialState);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await fetch("/api/users/check-login", {
+          credentials: "include",
+        });
+        const user = await response.json();
+        console.log(user);
+        if (user.user) {
+          userDispatch({ type: "LOGIN_SUCCESS", payload: user.user });
+        } else {
+          userDispatch({ type: "LOGOUT" });
+        }
+      } catch (error) {
+        console.error("Error fetching user:", error);
+        userDispatch({ type: "AUTH_ERROR" });
+      }
+    };
+    fetchUser();
+  }, []);
 
   return (
     <AuthContext.Provider value={userState}>
@@ -39,7 +60,7 @@ function authReducer(state, action) {
       };
     case "AUTH_ERROR":
       return {
-        ...state,
+        ...initialState,
       };
     default:
       return state;
@@ -51,37 +72,3 @@ const initialState = {
   user: null, // user info
   isAuthenticated: false, // is user logged in?
 };
-
-// useEffect(() => {
-//   const checkAuth = async () => {
-//     const authToken = Cookies.get("token");
-//     console.log("authToken:", authToken);
-
-//     if (!authToken) {
-//       userDispatch({ type: "LOADED" });
-//       return;
-//     }
-
-//     try {
-//       const response = await fetch("/api/validate-token", {
-//         headers: {
-//           Authorization: `Bearer ${authToken}`,
-//         },
-//       });
-
-//       if (response.ok) {
-//         const userData = await response.json();
-//         userDispatch({ type: "LOGIN", payload: userData });
-//       } else {
-//         Cookies.remove("authToken");
-//         userDispatch({ type: "LOADED" });
-//       }
-//     } catch (error) {
-//       console.error("验证失败:", error);
-//       Cookies.remove("authToken");
-//       userDispatch({ type: "LOADED" });
-//     }
-//   };
-
-//   checkAuth();
-// }, []);
