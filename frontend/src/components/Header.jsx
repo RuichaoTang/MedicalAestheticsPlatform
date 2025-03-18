@@ -14,6 +14,7 @@ import {
 } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { useAuth, useAuthDispatch } from "../context/AuthContext";
 
 const products = [
   {
@@ -35,7 +36,24 @@ const products = [
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const user = false;
+
+  const user = useAuth();
+  const dispatch = useAuthDispatch();
+  console.log("user", user);
+
+  const handleLogOut = () => {
+    console.log("Logging out...");
+    const response = fetch("/api/users/logout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (response.ok) {
+      console.log("Logged out successfully");
+      dispatch({ type: "LOGOUT" });
+    }
+  };
 
   return (
     <header className="bg-white ">
@@ -99,7 +117,7 @@ export default function Header() {
           <a href="/" className="text-sm/6 font-semibold text-gray-900">
             Home
           </a>
-          {user ? (
+          {user.isAuthenticated ? (
             <a href="/me" className="text-sm/6 font-semibold text-gray-900">
               Me
             </a>
@@ -110,7 +128,7 @@ export default function Header() {
           </a>
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          {user ? (
+          {user.isAuthenticated ? (
             <a href="#" className="text-sm/6 font-semibold text-gray-900">
               Log out <span aria-hidden="true">&rarr;</span>
             </a>
@@ -175,7 +193,7 @@ export default function Header() {
                 >
                   Home
                 </a>
-                {user ? (
+                {user.isAuthenticated ? (
                   <a
                     href="/me"
                     className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
@@ -192,13 +210,18 @@ export default function Header() {
                 </a>
               </div>
               <div className="py-6">
-                {user ? (
-                  <a
-                    href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-                  >
-                    Log out
-                  </a>
+                {user.isAuthenticated ? (
+                  <>
+                    <p className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900">
+                      {user.user.firstName}
+                    </p>
+                    <button
+                      onClick={handleLogOut}
+                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                    >
+                      Log out
+                    </button>
+                  </>
                 ) : (
                   <a
                     href="/login"

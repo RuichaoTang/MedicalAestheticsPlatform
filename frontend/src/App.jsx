@@ -13,7 +13,7 @@ import NotFound from "./pages/NotFound";
 import { AuthProvider } from "./context/AuthContext";
 
 function App() {
-  const isAuthenticated = false;
+  // const isAuthenticated = false;
 
   return (
     <>
@@ -28,7 +28,7 @@ function App() {
             <Route path="/treatments" element={<Treatments />} />
             <Route path="/treatment/:treatmentId" element={<Treatment />} />
             <Route path="/doctors" element={<Doctors />} />
-            <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
+            <Route element={<PrivateRoute />}>
               <Route path="/me/:userId" element={<Me />} />
             </Route>
             <Route path="*" element={<NotFound />} />

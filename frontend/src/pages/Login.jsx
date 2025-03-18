@@ -1,12 +1,12 @@
 import Header from "../components/Header";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Field, Label, Switch } from "@headlessui/react";
 import { Link } from "react-router-dom";
-// import { useAuth } from "../context/AuthContext";
+import { useAuthDispatch } from "../context/AuthContext";
 
 export default function Login() {
   const navigate = useNavigate();
+  const dispatch = useAuthDispatch();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -38,15 +38,17 @@ export default function Login() {
       console.log(data);
       if (!response.ok) {
         console.log("data.message", data.message);
+        dispatch({ type: "AUTH_ERROR" });
         setError(data.message);
         setLoading(false);
 
         return;
       }
-
+      dispatch({ type: "LOGIN_SUCCESS", payload: data.user });
       setLoading(false);
       navigate("/");
     } catch (error) {
+      dispatch({ type: "AUTH_ERROR" });
       setError(error.message);
       setLoading(false);
     }

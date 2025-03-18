@@ -1,17 +1,30 @@
 import { createContext, useReducer, useContext } from "react";
 
-// 1. 创建 Context
-const AuthContext = createContext();
+// create Context
+const AuthContext = createContext(null);
+const AuthDispatchContext = createContext(null);
 
-// 2. 定义初始状态
-const initialState = {
-  user: null, // 用户信息
-  isAuthenticated: false, // 登录状态
-  loading: true, // 初始化加载状态
-  error: null, // 错误信息
-};
+export function AuthProvider({ children }) {
+  const [userState, userDispatch] = useReducer(authReducer, initialState);
 
-// 3. 定义 reducer
+  return (
+    <AuthContext.Provider value={userState}>
+      <AuthDispatchContext.Provider value={userDispatch}>
+        {children}
+      </AuthDispatchContext.Provider>
+    </AuthContext.Provider>
+  );
+}
+
+export function useAuth() {
+  return useContext(AuthContext);
+}
+
+export function useAuthDispatch() {
+  return useContext(AuthDispatchContext);
+}
+
+// define reducer
 function authReducer(state, action) {
   switch (action.type) {
     case "LOGIN_SUCCESS":
@@ -19,66 +32,56 @@ function authReducer(state, action) {
         ...state,
         user: action.payload,
         isAuthenticated: true,
-        loading: false,
       };
     case "LOGOUT":
       return {
         ...initialState,
-        loading: false,
       };
     case "AUTH_ERROR":
       return {
         ...state,
-        error: action.payload,
-        loading: false,
       };
     default:
       return state;
   }
 }
 
-// 4. 创建 Provider 组件
-export function AuthProvider({ children }) {
-  const [state, dispatch] = useReducer(authReducer, initialState);
-
-  // 登录方法
-  const login = async (credentials) => {
-    try {
-      // 这里替换为真实的 API 调用
-      const user = await fakeAuthAPI(credentials);
-
-      dispatch({ type: "LOGIN_SUCCESS", payload: user });
-    } catch (error) {
-      dispatch({ type: "AUTH_ERROR", payload: error.message });
-    }
-  };
-
-  // 登出方法
-  const logout = () => {
-    dispatch({ type: "LOGOUT" });
-  };
-
-  return (
-    <AuthContext.Provider value={{ ...state, login, logout }}>
-      {children}
-    </AuthContext.Provider>
-  );
-}
-
-// 5. 创建自定义 Hook
-export function useAuth() {
-  return useContext(AuthContext);
-}
-
-// 模拟 API
-const fakeAuthAPI = ({ email, password }) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (email === "test@example.com" && password === "123456") {
-        resolve({ name: "John Doe", email });
-      } else {
-        reject(new Error("Invalid credentials"));
-      }
-    }, 1000);
-  });
+// define the initial state (no user logged in)
+const initialState = {
+  user: null, // user info
+  isAuthenticated: false, // is user logged in?
 };
+
+// useEffect(() => {
+//   const checkAuth = async () => {
+//     const authToken = Cookies.get("token");
+//     console.log("authToken:", authToken);
+
+//     if (!authToken) {
+//       userDispatch({ type: "LOADED" });
+//       return;
+//     }
+
+//     try {
+//       const response = await fetch("/api/validate-token", {
+//         headers: {
+//           Authorization: `Bearer ${authToken}`,
+//         },
+//       });
+
+//       if (response.ok) {
+//         const userData = await response.json();
+//         userDispatch({ type: "LOGIN", payload: userData });
+//       } else {
+//         Cookies.remove("authToken");
+//         userDispatch({ type: "LOADED" });
+//       }
+//     } catch (error) {
+//       console.error("验证失败:", error);
+//       Cookies.remove("authToken");
+//       userDispatch({ type: "LOADED" });
+//     }
+//   };
+
+//   checkAuth();
+// }, []);

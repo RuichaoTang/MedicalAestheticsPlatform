@@ -90,7 +90,12 @@ export const loginUser = async (req, res) => {
 
     res.status(200).json({
       message: "Login successful",
-      user: { email: user.email, id: user._id },
+      user: {
+        email: user.email,
+        id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      },
     });
   } catch (error) {
     console.error("Login error:", error);
@@ -121,20 +126,3 @@ export const logout = async (req, res) => {
   res.clearCookie("token");
   res.send({ success: true, message: "Logout successful" });
 };
-
-// export const getProfile = async (req, res) => {
-//   const { id } = req.params;
-//   const userCollection = client.db("data").collection("users");
-
-//   try {
-//     const user = await userCollection.findOne({ _id: ObjectId(id) });
-//     if (!user) {
-//       return res.status(404).json({ message: "User not found" });
-//     }
-
-//     res.status(200).json(user);
-//   } catch (error) {
-//     console.error("Error getting user profile:", error);
-//     res.status(500).json({ message: error.message });
-//   }
-// };
