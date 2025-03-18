@@ -80,7 +80,7 @@ export default function Treatments() {
                 : treatments.map((treatment) => (
                     <TreatmentCard
                       treatment={treatment}
-                      key={`cardId${treatment.treatment_id}`}
+                      key={`cardId${treatment._id}`}
                     />
                   ))}
           </div>

@@ -41,7 +41,7 @@ export default function Header() {
 
   const user = useAuth();
   const dispatch = useAuthDispatch();
-  console.log("user reducer", user);
+  // console.log("user reducer", user);
 
   const handleLogOut = () => {
     const isConfirmed = window.confirm("Log Out？");
@@ -133,7 +133,10 @@ export default function Header() {
         <div className="hidden lg:flex lg:flex-1 lg:justify-end gap-4">
           {user.isAuthenticated ? (
             <>
-              <a href="/me" className="text-sm/6 font-semibold text-gray-900">
+              <a
+                href={`/me/${user.user._id}`}
+                className="text-sm/6 font-semibold text-gray-900"
+              >
                 Hi! {user.user.firstName}.
               </a>
               <button

@@ -15,11 +15,11 @@ export default function Register() {
     password: "",
   });
 
-  useEffect(() => {
-    console.log("formData", formData);
-    console.log("error", error);
-    console.log("loading", loading);
-  }, [formData, error, loading]);
+  // useEffect(() => {
+  //   console.log("formData", formData);
+  //   console.log("error", error);
+  //   console.log("loading", loading);
+  // }, [formData, error, loading]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

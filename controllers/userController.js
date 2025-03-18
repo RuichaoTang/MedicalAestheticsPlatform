@@ -126,9 +126,10 @@ export const checkLogin = async (req, res) => {
     if (!userData) {
       return res.status(204).send();
     }
-    const { firstName, lastName, email } = userData;
-    const user = { firstName, lastName, email };
-    console.log("User:", { firstName, lastName, email });
+    // console.log(userData);
+    const { firstName, lastName, email, _id } = userData;
+    const user = { firstName, lastName, email, _id };
+    // console.log("User:", { firstName, lastName, email });
     res.send({ user });
   } catch (err) {
     res.clearCookie("token");

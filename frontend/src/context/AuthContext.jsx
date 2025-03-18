@@ -53,14 +53,17 @@ function authReducer(state, action) {
         ...state,
         user: action.payload,
         isAuthenticated: true,
+        loading: false,
       };
     case "LOGOUT":
       return {
         ...initialState,
+        loading: false,
       };
     case "AUTH_ERROR":
       return {
         ...initialState,
+        loading: false,
       };
     default:
       return state;
@@ -71,4 +74,5 @@ function authReducer(state, action) {
 const initialState = {
   user: null, // user info
   isAuthenticated: false, // is user logged in?
+  loading: true,
 };

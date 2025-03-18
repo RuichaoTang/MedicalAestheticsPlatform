@@ -15,12 +15,12 @@ export default function ClinicCard({ treatment }) {
   return (
     <>
       <article
-        key={treatment.treatment_id}
+        key={treatment._id}
         className="flex max-w-xl flex-col items-start justify-between"
       >
         <div className="group relative">
           <h3 className="mt-3 text-lg/6 font-medium text-gray-900 group-hover:text-gray-600 font-serif">
-            <Link to={`/treatment/:id=${treatment.treatment_id}`}>
+            <Link to={`/treatment/${treatment._id}`}>
               <span className="font-serif" />
               {treatment.treatment_title}
             </Link>
