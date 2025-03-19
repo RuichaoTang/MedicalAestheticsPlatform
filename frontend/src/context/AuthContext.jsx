@@ -14,7 +14,7 @@ export function AuthProvider({ children }) {
           credentials: "include",
         });
         const user = await response.json();
-        console.log(user);
+        // console.log(user);
         if (user.user) {
           userDispatch({ type: "LOGIN_SUCCESS", payload: user.user });
         } else {

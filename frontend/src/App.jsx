@@ -10,6 +10,7 @@ import Treatment from "./pages/Treatment";
 import Doctors from "./pages/Doctors";
 import PrivateRoute from "./components/PrivateRoute";
 import NotFound from "./pages/NotFound";
+import Clinic from "./pages/Clinic";
 import { AuthProvider } from "./context/AuthContext";
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/clinics" element={<Clinics />} />
+            <Route path="/clinic/:clinicId" element={<Clinic />} />
             <Route path="/treatments" element={<Treatments />} />
             <Route path="/treatment/:treatmentId" element={<Treatment />} />
             <Route path="/doctors" element={<Doctors />} />

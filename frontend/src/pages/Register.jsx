@@ -153,7 +153,7 @@ export default function Register() {
                 <Switch
                   checked={agreed}
                   onChange={setAgreed}
-                  className="group flex w-8 flex-none cursor-pointer rounded-full bg-gray-200 p-px ring-1 ring-gray-900/5 transition-colors duration-200 ease-in-out ring-inset focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 data-checked:bg-indigo-600"
+                  className="group flex w-8 flex-none cursor-pointer rounded-full bg-gray-200 p-px ring-1 ring-gray-900/5 transition-colors duration-200 ease-in-out ring-inset focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600 data-checked:bg-teal-600"
                 >
                   <span className="sr-only">Agree to policies</span>
                   <span
@@ -164,7 +164,7 @@ export default function Register() {
               </div>
               <Label className="text-sm/6 text-gray-600">
                 By selecting this, you agree to our{" "}
-                <a href="#" className="font-semibold text-indigo-600">
+                <a href="#" className="font-semibold text-teal-600">
                   privacy&nbsp;policy
                 </a>
                 .
@@ -175,7 +175,7 @@ export default function Register() {
             <button
               type="submit"
               disabled={loading}
-              className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="block w-full rounded-md bg-teal-700 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               {loading ? "REGISTERING..." : "REGISTER"}
             </button>

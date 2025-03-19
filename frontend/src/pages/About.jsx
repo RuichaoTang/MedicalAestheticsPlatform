@@ -49,7 +49,7 @@ export default function About() {
                       <h3 className="text-base/7 font-semibold tracking-tight text-gray-900">
                         {person.name}
                       </h3>
-                      <p className="text-sm/6 font-semibold text-cyan-700">
+                      <p className="text-sm/6 font-semibold text-teal-700">
                         {person.role}
                       </p>
                     </div>
@@ -76,7 +76,7 @@ export default function About() {
             <h3 className="text-base/7 font-semibold tracking-tight text-gray-900">
               Say Hello:
             </h3>
-            <p className="text-sm/6 font-semibold text-cyan-700">
+            <p className="text-sm/6 font-semibold text-teal-700">
               tangrich@outlook.com
             </p>
           </div>
@@ -84,7 +84,7 @@ export default function About() {
             <h3 className="text-base/7 font-semibold tracking-tight text-gray-900">
               Join Our team:
             </h3>
-            <p className="text-sm/6 font-semibold text-cyan-700">
+            <p className="text-sm/6 font-semibold text-teal-700">
               tangrich@outlook.com
             </p>
           </div>
@@ -92,7 +92,7 @@ export default function About() {
             <h3 className="text-base/7 font-semibold tracking-tight text-gray-900">
               Colaborate:
             </h3>
-            <p className="text-sm/6 font-semibold text-cyan-700">
+            <p className="text-sm/6 font-semibold text-teal-700">
               tangrich@outlook.com
             </p>
           </div>
@@ -100,7 +100,7 @@ export default function About() {
             <h3 className="text-base/7 font-semibold tracking-tight text-gray-900">
               Advertisement:
             </h3>
-            <p className="text-sm/6 font-semibold text-cyan-700">
+            <p className="text-sm/6 font-semibold text-teal-700">
               tangrich@outlook.com
             </p>
           </div>

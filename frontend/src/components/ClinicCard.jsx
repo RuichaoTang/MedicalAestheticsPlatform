@@ -19,7 +19,7 @@ export default function ClinicCard({ clinic }) {
       >
         <div className="group relative">
           <h3 className="mt-3 text-lg/6 font-semibold text-gray-900 group-hover:text-gray-600 font-serif">
-            <Link to={`/clinic/:id=${clinic.clinic_id}`}>
+            <Link to={`/clinic/${clinic._id}`}>
               <span className="absolute inset-0" />
               {clinic.clinic_name}
             </Link>

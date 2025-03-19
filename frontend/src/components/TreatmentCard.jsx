@@ -1,17 +1,6 @@
 import { Link } from "react-router-dom";
+import { formatNumber, formatPrice } from "../utils/utils";
 export default function ClinicCard({ treatment }) {
-  function formatPrice(price) {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 2,
-    }).format(price);
-  }
-
-  function formatNumber(number) {
-    return new Intl.NumberFormat("en-US").format(number);
-  }
-
   return (
     <>
       <article

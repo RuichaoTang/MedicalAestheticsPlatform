@@ -112,7 +112,7 @@ export default function Login() {
             <div className="flex sm:col-span-2">
               <div className="text-sm/6 text-gray-600">
                 Doesn't have an account?{" "}
-                <Link to="/register" className="font-semibold text-indigo-600">
+                <Link to="/register" className="font-semibold text-teal-600">
                   Create&nbsp;Account
                 </Link>
                 .
@@ -123,7 +123,7 @@ export default function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="block w-full rounded-md bg-teal-700 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-xs hover:bg-teal-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               {loading ? "LOGGING IN..." : "LOG IN"}
             </button>

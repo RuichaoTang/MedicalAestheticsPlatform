@@ -135,7 +135,7 @@ export default function Header() {
             <>
               <a
                 href={`/me/${user.user._id}`}
-                className="text-sm/6 font-semibold text-gray-900"
+                className="text-sm/6 font-semibold text-teal-700"
               >
                 Hi! {user.user.firstName}.
               </a>
@@ -207,14 +207,6 @@ export default function Header() {
                 >
                   Home
                 </a>
-                {user.isAuthenticated ? (
-                  <a
-                    href="/me"
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-                  >
-                    Hi! {user.firstName}!
-                  </a>
-                ) : null}
 
                 <a
                   href="/about"
@@ -226,9 +218,12 @@ export default function Header() {
               <div className="py-6">
                 {user.isAuthenticated ? (
                   <>
-                    <p className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900">
-                      {user.firstName}
-                    </p>
+                    <a
+                      href={`/me/${user.user._id}`}
+                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-teal-700"
+                    >
+                      Hi! {user.user.firstName}.
+                    </a>
                     <button
                       onClick={handleLogOut}
                       className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
