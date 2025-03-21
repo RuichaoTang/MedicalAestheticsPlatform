@@ -30,9 +30,13 @@ export const findOneClinic = async (req, res) => {
 };
 
 export const searchByOwner = async (req, res) => {
+  const userId = req.params.id;
+  console.log(userId);
   try {
     const clinicCollection = client.db("data").collection("clinic");
-    const clinics = await clinicCollection.find().toArray();
+    const clinics = await clinicCollection
+      .find({ owner: new ObjectId(userId) })
+      .toArray();
     console.log(clinics);
     res.status(200).json(clinics);
   } catch (error) {

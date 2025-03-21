@@ -12,8 +12,8 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(express.json()); // 处理 JSON 请求体
-app.use(cookieParser()); // 解析 Cookies
+app.use(express.json());
+app.use(cookieParser());
 
 const __dirname = path.resolve();
 

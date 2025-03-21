@@ -1,15 +1,12 @@
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
-import { useAuth, useAuthDispatch } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
+import ClinicCard from "../components/ClinicCard";
 
 export default function Me() {
-  const { userId } = useParams();
-  //   console.log("user-id", userId);
-
   const [activeTab, setActiveTab] = useState("clinics");
   const [clinics, setClinics] = useState([]);
-  const [treatments, setTreatments] = useState([]);
+  const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -17,50 +14,51 @@ export default function Me() {
   console.log(user);
 
   useEffect(() => {
-    const fetchClinics = async () => {
+    const fetchYourClinics = async () => {
+      setLoading(true);
       try {
-        const response = await fetch(`/api/clinicsByUser/${user.user._id}`);
+        const response = await fetch(
+          `/api/clinics/clinicsByUser/${user.user._id}`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          // console.log(data);
+          setClinics(data);
+          setLoading(false);
+        }
       } catch (error) {
         console.error("error", error);
+        setError(error);
+        setLoading(false);
       }
     };
 
-    fetchClinics();
-  }, []);
+    fetchYourClinics();
+  }, [user.user._id]);
 
   return (
     <>
       <Header />
 
       <div className="min-h-screen ">
-        {/* 主容器 */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          {/* 仪表盘标题和操作区 */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
             <div className="mb-6 sm:mb-0">
               <h1 className="text-3xl font-bold text-teal-700">
                 Hi! {user.user.firstName}.
               </h1>
               <p className="font-serif text-xl sm:text-2xl">
-                Manage Your Treatments / Clinics here.
+                Manage Your Clinics here.
               </p>
             </div>
             <div className="flex space-x-4">
               <button
                 className="bg-teal-700 font-semibold text-white px-6 py-2 rounded-lg hover:bg-teal-800 transition-colors"
                 onClick={() => {
-                  /* 添加跳转到创建页面的逻辑 */
+                  // add create new clinic function, in the future.
                 }}
               >
                 New Clinic
-              </button>
-              <button
-                className="bg-teal-700 font-semibold text-white px-6 py-2 rounded-lg hover:bg-teal-800 transition-colors"
-                onClick={() => {
-                  /* 添加跳转到创建页面的逻辑 */
-                }}
-              >
-                New Treatment
               </button>
             </div>
           </div>
@@ -79,14 +77,14 @@ export default function Me() {
                 My Clinics ({clinics.length})
               </button>
               <button
-                onClick={() => setActiveTab("treatments")}
+                onClick={() => setActiveTab("orders")}
                 className={`pb-4 px-1 border-b-2 font-medium text-sm ${
                   activeTab === "treatments"
                     ? "border-emerald-500 text-emerald-600"
                     : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
                 }`}
               >
-                My Treatments ({treatments.length})
+                My History Orders ({orders.length})
               </button>
             </nav>
           </div>
@@ -102,49 +100,37 @@ export default function Me() {
             </div>
           ) : (
             <>
-              {/* 诊所列表 */}
+              {/* Clinic List */}
               {activeTab === "clinics" && (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {clinics.length > 0 ? (
-                    clinics.map((clinic) => (
-                      <ClinicCard
-                        key={clinic._id}
-                        clinic={clinic}
-                        onEdit={() => {
-                          /* 编辑逻辑 */
-                        }}
-                        onDelete={() => {
-                          /* 删除逻辑 */
-                        }}
-                      />
+                    clinics.map((clinic, index) => (
+                      <ClinicCard clinic={clinic} key={index} />
                     ))
                   ) : (
                     <div className="col-span-full text-center py-12">
-                      <p className="text-gray-500">暂无诊所数据</p>
+                      <p className="text-gray-500">
+                        Currently, you don't have any clinic. Create one if you
+                        want.
+                      </p>
                     </div>
                   )}
                 </div>
               )}
 
-              {/* 疗程列表 */}
-              {activeTab === "treatments" && (
+              {/* Order History */}
+              {activeTab === "orders" && (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {treatments.length > 0 ? (
-                    treatments.map((treatment) => (
-                      <TreatmentCard
-                        key={treatment._id}
-                        treatment={treatment}
-                        onEdit={() => {
-                          /* 编辑逻辑 */
-                        }}
-                        onDelete={() => {
-                          /* 删除逻辑 */
-                        }}
-                      />
+                  {orders.length > 0 ? (
+                    orders.map(() => (
+                      // add a order history in the future.
+                      <></>
                     ))
                   ) : (
                     <div className="col-span-full text-center py-12">
-                      <p className="text-gray-500">暂无疗程数据</p>
+                      <p className="text-gray-500">
+                        You don't have any order history.
+                      </p>
                     </div>
                   )}
                 </div>

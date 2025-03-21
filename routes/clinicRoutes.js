@@ -10,6 +10,6 @@ const router = express.Router();
 // 检查登录状态接口
 router.get("/all", showAllClinics);
 router.get("/:id", findOneClinic);
-router.get("/searchByOwner/:id", searchByOwner);
+router.get("/clinicsByUser/:id", searchByOwner);
 
 export default router;
