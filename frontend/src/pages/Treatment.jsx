@@ -104,7 +104,7 @@ export default function Treatment() {
               </div>
               <button
                 className="bg-teal-700 hover:bg-teal-800 text-white px-4 md:px-8  py-3 md:py-4 rounded-xl transition-all 
-                font-medium text-md md:text-lg shadow-md hover:shadow-teal-100"
+                font-medium text-md md:text-lg shadow-md hover:shadow-teal-100 font-stretch-semi-condensed"
               >
                 Book Now
               </button>

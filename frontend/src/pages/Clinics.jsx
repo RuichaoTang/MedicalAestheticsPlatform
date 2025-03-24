@@ -150,10 +150,7 @@ export default function Clinics() {
               <p>loading...</p>
             ) : (
               clinics.map((clinic) => (
-                <ClinicCard
-                  clinic={clinic}
-                  key={`clinicCard${clinic.clinic_id}`}
-                />
+                <ClinicCard clinic={clinic} key={`clinicCard${clinic._id}`} />
               ))
             )}
           </div>

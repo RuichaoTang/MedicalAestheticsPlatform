@@ -61,7 +61,7 @@ export const registerUser = async (req, res) => {
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(email, password);
+    // console.log(email, password);
 
     const userCollection = client.db("data").collection("users");
 
@@ -105,18 +105,18 @@ export const loginUser = async (req, res) => {
 };
 
 export const checkLogin = async (req, res) => {
-  console.log("Checking login status...");
+  // console.log("Checking login status...");
   // console.log(req.cookies);
   const token = req.cookies.token;
 
   if (!token) {
-    console.log("No token found");
+    // console.log("No token found");
     return res.send({ user: null });
   }
 
   try {
     const user_decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log("Decoded token:", user_decoded);
+    // console.log("Decoded token:", user_decoded);
 
     const user_id = new ObjectId(user_decoded.id);
     const userCollection = client.db("data").collection("users");

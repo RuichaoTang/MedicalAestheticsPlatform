@@ -1,23 +1,44 @@
 import { Link } from "react-router-dom";
-export default function ClinicCard({ clinic }) {
-  function formatPrice(price) {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 2,
-    }).format(price);
-  }
+import { useEffect, useState } from "react";
+import { formatNumber, formatPrice } from "../utils/utils";
 
-  function formatNumber(number) {
-    return new Intl.NumberFormat("en-US").format(number);
-  }
+export default function ClinicCard({ clinic }) {
+  const [featuredTreatment, setFeaturedTreatment] = useState(null);
+
+  useEffect(() => {
+    console.log("here");
+    if (!clinic || !clinic.featured_treatment) {
+      return;
+    }
+
+    const fetchTreatment = async () => {
+      try {
+        // console.log(clinic.featured_treatment);
+        const response = await fetch(
+          `/api/treatments/${clinic.featured_treatment}`
+        );
+        // console.log(response);
+        if (!response.ok) {
+          throw new Error("Failed to fetch treatment");
+        }
+        const data = await response.json();
+        // console.log(data);
+        setFeaturedTreatment(data);
+      } catch (error) {
+        console.error("Error fetching treatment:", error);
+      }
+    };
+
+    fetchTreatment();
+  }, [clinic]);
+
   return (
     <>
       <article
         key={clinic.clinic_id}
-        className="flex max-w-xl flex-col items-start justify-between p-6"
+        className="flex max-w-xl flex-col items-start justify-between p-6 shadow-sm"
       >
-        <div className="group relative">
+        <div className="group relative w-full">
           <h3 className="mt-3 text-lg/6 font-semibold text-gray-900 group-hover:text-gray-600 font-serif">
             <Link to={`/clinic/${clinic._id}`}>
               <span className="absolute inset-0" />
@@ -35,22 +56,24 @@ export default function ClinicCard({ clinic }) {
               Sold: {formatNumber(clinic.clinic_sold)}
             </div>
           </div>
-          <p className="mt-5 line-clamp-3 text-sm/6 text-gray-600">
+          <p className="mt-2 line-clamp-3 text-sm/6 text-gray-600">
             {clinic.clinic_description}
           </p>
         </div>
-        <div className="relative mt-8 flex items-center gap-x-4">
-          <div className="text-sm/6">
-            <p className="font-semibold text-gray-900">Featured Treatment:</p>
-            <p className="font-semibold text-emerald-700">
-              <Link to={`/treatment/${clinic.featured_treatment.treatment_id}`}>
-                <span className="absolute inset-0" />
-                {clinic.featured_treatment.treatment_name} -{" "}
-                {formatPrice(clinic.featured_treatment.treatment_price)}
-              </Link>
-            </p>
+        {featuredTreatment && (
+          <div className="relative flex items-center gap-x-4 mt-3">
+            <div className="text-sm/6">
+              <p className="font-semibold text-gray-900">Featured Treatment:</p>
+              <p className="font-semibold text-emerald-700">
+                <Link to={`/treatment/${featuredTreatment._id}`}>
+                  <span className="absolute inset-0" />
+                  {featuredTreatment.treatment_title} -{" "}
+                  {formatPrice(featuredTreatment.price)}
+                </Link>
+              </p>
+            </div>
           </div>
-        </div>
+        )}
       </article>
     </>
   );

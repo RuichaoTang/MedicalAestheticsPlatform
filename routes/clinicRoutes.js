@@ -3,6 +3,7 @@ import {
   showAllClinics,
   findOneClinic,
   searchByOwner,
+  newClinic,
 } from "../controllers/clinicController.js";
 
 const router = express.Router();
@@ -11,5 +12,6 @@ const router = express.Router();
 router.get("/all", showAllClinics);
 router.get("/:id", findOneClinic);
 router.get("/clinicsByUser/:id", searchByOwner);
+router.post("/new-clinic", newClinic);
 
 export default router;

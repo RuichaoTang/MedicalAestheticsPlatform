@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import { useAuth } from "../context/AuthContext";
 import ClinicCard from "../components/ClinicCard";
@@ -6,12 +7,13 @@ import ClinicCard from "../components/ClinicCard";
 export default function Me() {
   const [activeTab, setActiveTab] = useState("clinics");
   const [clinics, setClinics] = useState([]);
-  // const [orders, setOrders] = useState([]);
+  const [orders, setOrders] = useState([]); // to be continued...
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const navigate = useNavigate();
   const user = useAuth();
-  console.log(user);
+  // console.log(user);
 
   useEffect(() => {
     const fetchYourClinics = async () => {
@@ -55,7 +57,7 @@ export default function Me() {
               <button
                 className="bg-teal-700 font-semibold text-white px-6 py-2 rounded-lg hover:bg-teal-800 transition-colors"
                 onClick={() => {
-                  // add create new clinic function, in the future.
+                  navigate("/new-clinic");
                 }}
               >
                 New Clinic
@@ -63,7 +65,7 @@ export default function Me() {
             </div>
           </div>
 
-          {/* 导航选项卡 */}
+          {/* direct */}
           <div className="border-b border-gray-200 mb-8">
             <nav className="flex space-x-8">
               <button
@@ -89,7 +91,7 @@ export default function Me() {
             </nav>
           </div>
 
-          {/* 内容区域 */}
+          {/* Main content */}
           {loading ? (
             <div className="flex justify-center items-center h-64">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>

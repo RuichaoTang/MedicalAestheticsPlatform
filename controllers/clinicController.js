@@ -5,7 +5,7 @@ export const showAllClinics = async (req, res) => {
   try {
     const clinicCollection = client.db("data").collection("clinic");
     const clinics = await clinicCollection.find().toArray();
-    console.log(clinics);
+    // console.log(clinics);
     res.status(200).json(clinics);
   } catch (error) {
     console.error("Error during fetching clinics:", error);
@@ -21,7 +21,7 @@ export const findOneClinic = async (req, res) => {
     const theClinic = await treatmentCollection.findOne({
       _id: new ObjectId(req.params.id),
     });
-    console.log(theClinic);
+    // console.log(theClinic);
     res.status(200).json(theClinic);
   } catch (error) {
     console.error("Error during fetching the clinic:", error);
@@ -37,10 +37,23 @@ export const searchByOwner = async (req, res) => {
     const clinics = await clinicCollection
       .find({ owner: new ObjectId(userId) })
       .toArray();
-    console.log(clinics);
+    // console.log(clinics);
     res.status(200).json(clinics);
   } catch (error) {
     console.error("Error during fetching clinics:", error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const newClinic = async (req, res) => {
+  try {
+    const clinicCollection = client.db("data").collection("clinic");
+    const response = await clinicCollection.insertOne(req.body);
+    const clinicId = response.insertedId;
+    // console.log("response", response);
+    res.status(200).json({ clinicId });
+  } catch (error) {
+    console.error("Error during create a new clinic:", error);
     res.status(500).json({ message: error.message });
   }
 };
