@@ -48,7 +48,33 @@ export const searchByOwner = async (req, res) => {
 export const newClinic = async (req, res) => {
   try {
     const clinicCollection = client.db("data").collection("clinic");
-    const response = await clinicCollection.insertOne(req.body);
+
+    const {
+      clinic_name,
+      clinic_location,
+      clinic_location_street,
+      clinic_rating,
+      clinic_description,
+      clinic_sold,
+      operating_hours,
+      owner,
+      featured_treatment,
+    } = req.body;
+
+    const newClinic = {
+      clinic_name,
+      clinic_location,
+      clinic_location_street,
+      clinic_rating,
+      clinic_description,
+      clinic_sold,
+      operating_hours,
+      featured_treatment,
+      owner: new ObjectId(owner),
+      createdAt: new Date(),
+    };
+
+    const response = await clinicCollection.insertOne(newClinic);
     const clinicId = response.insertedId;
     // console.log("response", response);
     res.status(200).json({ clinicId });

@@ -6,7 +6,7 @@ export default function ClinicCard({ clinic }) {
   const [featuredTreatment, setFeaturedTreatment] = useState(null);
 
   useEffect(() => {
-    console.log("here");
+    // console.log("here");
     if (!clinic || !clinic.featured_treatment) {
       return;
     }
@@ -39,7 +39,7 @@ export default function ClinicCard({ clinic }) {
         className="flex max-w-xl flex-col items-start justify-between p-6 shadow-sm"
       >
         <div className="group relative w-full">
-          <h3 className="mt-3 text-lg/6 font-semibold text-gray-900 group-hover:text-gray-600 font-serif">
+          <h3 className="mt-3 text-lg/6  text-gray-900 group-hover:text-gray-600 font-serif">
             <Link to={`/clinic/${clinic._id}`}>
               <span className="absolute inset-0" />
               {clinic.clinic_name}
@@ -63,7 +63,9 @@ export default function ClinicCard({ clinic }) {
         {featuredTreatment && (
           <div className="relative flex items-center gap-x-4 mt-3">
             <div className="text-sm/6">
-              <p className="font-semibold text-gray-900">Featured Treatment:</p>
+              <p className="font-semibold text-gray-900 font-stretch-semi-condensed">
+                Featured Treatment:
+              </p>
               <p className="font-semibold text-emerald-700">
                 <Link to={`/treatment/${featuredTreatment._id}`}>
                   <span className="absolute inset-0" />

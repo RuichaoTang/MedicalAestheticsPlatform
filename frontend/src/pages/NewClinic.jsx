@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import { formatPrice, formatNumber } from "../utils/utils";
 import { useAuth } from "../context/AuthContext";
 
-export default function NewClinic({ clinicId = null }) {
-  const [newClinic, setNewClinic] = useState(clinicId === null);
+export default function NewClinic({ clinic = null }) {
+  const [newClinic, setNewClinic] = useState(clinic === null);
   const user = useAuth();
   const navigate = useNavigate();
   console.log(newClinic);
@@ -66,15 +66,15 @@ export default function NewClinic({ clinicId = null }) {
   ]);
 
   const [formData, setFormData] = useState({
-    clinic_name: "",
-    clinic_location: "",
-    clinic_location_street: "",
-    clinic_rating: 5,
-    clinic_description: "",
-    clinic_sold: 500,
-    operating_hours: "",
-    owner: user._id,
-    featured_treatment: null,
+    clinic_name: clinic ? `${clinic.clinic_name}` : "",
+    clinic_location: clinic ? `${clinic.clinic_location}` : "",
+    clinic_location_street: clinic ? `${clinic.clinic_location_street}` : "",
+    clinic_rating: clinic ? clinic.clinic_rating : 5,
+    clinic_description: clinic ? `${clinic.clinic.description}` : "",
+    clinic_sold: clinic ? clinic.sold : 500,
+    operating_hours: clinic ? clinic.operating_hours : "",
+    owner: user.user._id,
+    featured_treatment: clinic ? clinic.featured_treatment : null,
   });
 
   const [loading, setLoading] = useState(false);
@@ -87,7 +87,7 @@ export default function NewClinic({ clinicId = null }) {
     }
     const fetchClinicData = async () => {
       try {
-        const response = await fetch(`/api/clinics/${clinicId}`);
+        const response = await fetch(`/api/clinics/${clinic._id}`);
         if (!response.ok) throw new Error("Failed to fetch clinic data");
         const data = await response.json();
         setFormData(data);
@@ -98,11 +98,12 @@ export default function NewClinic({ clinicId = null }) {
       }
     };
     fetchClinicData();
-  }, [clinicId]);
+  }, [clinic]);
 
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
+  // useEffect(() => {
+  //   console.log(formData);
+  //   // console.log("user", user);
+  // }, [formData]);
 
   const handleTreatmentSelect = (treatmentId) => {
     const selected = treatments.find((t) => t.id === treatmentId);
@@ -118,16 +119,6 @@ export default function NewClinic({ clinicId = null }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // if (name.includes(".")) {
-    //   const [parent, child] = name.split(".");
-    //   setFormData((prev) => ({
-    //     ...prev,
-    //     [parent]: {
-    //       ...prev[parent],
-    //       [child]: value,
-    //     },
-    //   }));
-    // } else {
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -238,7 +229,6 @@ export default function NewClinic({ clinicId = null }) {
             </div>
           </div>
 
-          {/* 诊所描述 */}
           <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
             <h2 className="text-2xl font-semibold mb-6 font-stretch-ultra-condensed text-teal-900">
               Description
@@ -296,7 +286,6 @@ export default function NewClinic({ clinicId = null }) {
             />
           </div>
 
-          {/* 操作按钮 */}
           <div className="flex justify-end gap-4 mt-8">
             <button
               type="button"
