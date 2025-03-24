@@ -133,10 +133,7 @@ export default function Header() {
         <div className="hidden lg:flex lg:flex-1 lg:justify-end gap-4">
           {user.isAuthenticated ? (
             <>
-              <a
-                href={`/me/${user.user._id}`}
-                className="text-sm/6 font-semibold text-teal-700"
-              >
+              <a href={`/me`} className="text-sm/6 font-semibold text-teal-700">
                 Hi! {user.user.firstName}.
               </a>
               <button
@@ -219,7 +216,7 @@ export default function Header() {
                 {user.isAuthenticated ? (
                   <>
                     <a
-                      href={`/me/${user.user._id}`}
+                      href={`/me`}
                       className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-teal-700"
                     >
                       Hi! {user.user.firstName}.

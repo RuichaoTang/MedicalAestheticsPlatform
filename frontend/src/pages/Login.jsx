@@ -1,5 +1,5 @@
 import Header from "../components/Header";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useAuthDispatch } from "../context/AuthContext";
@@ -13,10 +13,6 @@ export default function Login() {
     email: "",
     password: "",
   });
-
-  // useEffect(() => {
-  //   console.log("formData", formData);
-  // }, [formData]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

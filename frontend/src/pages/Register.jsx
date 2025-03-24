@@ -1,5 +1,5 @@
 import Header from "../components/Header";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Field, Label, Switch } from "@headlessui/react";
 
@@ -14,12 +14,6 @@ export default function Register() {
     email: "",
     password: "",
   });
-
-  // useEffect(() => {
-  //   console.log("formData", formData);
-  //   console.log("error", error);
-  //   console.log("loading", loading);
-  // }, [formData, error, loading]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

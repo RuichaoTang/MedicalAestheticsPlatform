@@ -11,6 +11,7 @@ import Doctors from "./pages/Doctors";
 import PrivateRoute from "./components/PrivateRoute";
 import NotFound from "./pages/NotFound";
 import Clinic from "./pages/Clinic";
+import NewClinic from "./pages/NewClinic";
 import { AuthProvider } from "./context/AuthContext";
 
 function App() {
@@ -31,7 +32,8 @@ function App() {
             <Route path="/treatment/:treatmentId" element={<Treatment />} />
             <Route path="/doctors" element={<Doctors />} />
             <Route element={<PrivateRoute />}>
-              <Route path="/me/:userId" element={<Me />} />
+              <Route path="/me" element={<Me />} />
+              <Route path="/new-clinic" element={<NewClinic />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

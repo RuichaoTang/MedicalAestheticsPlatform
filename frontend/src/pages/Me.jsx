@@ -6,7 +6,7 @@ import ClinicCard from "../components/ClinicCard";
 export default function Me() {
   const [activeTab, setActiveTab] = useState("clinics");
   const [clinics, setClinics] = useState([]);
-  const [orders, setOrders] = useState([]);
+  // const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -121,7 +121,7 @@ export default function Me() {
               {/* Order History */}
               {activeTab === "orders" && (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {orders.length > 0 ? (
+                  {/* {orders.length > 0 ? (
                     orders.map(() => (
                       // add a order history in the future.
                       <></>
@@ -132,7 +132,7 @@ export default function Me() {
                         You don't have any order history.
                       </p>
                     </div>
-                  )}
+                  )} */}
                 </div>
               )}
             </>
