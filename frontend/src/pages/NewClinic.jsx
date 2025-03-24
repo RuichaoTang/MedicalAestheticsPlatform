@@ -76,25 +76,29 @@ export default function NewClinic({ clinicId = null }) {
     owner: user._id,
     featured_treatment: null,
   });
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // 获取诊所数据
-  // useEffect(() => {
-  //   const fetchClinicData = async () => {
-  //     try {
-  //       const response = await fetch(`/api/clinics/${clinicId}`);
-  //       if (!response.ok) throw new Error("Failed to fetch clinic data");
-  //       const data = await response.json();
-  //       setFormData(data);
-  //     } catch (err) {
-  //       setError(err.message);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   fetchClinicData();
-  // }, [clinicId]);
+  // if editing, then fill the form using db value.
+  useEffect(() => {
+    if (newClinic) {
+      return;
+    }
+    const fetchClinicData = async () => {
+      try {
+        const response = await fetch(`/api/clinics/${clinicId}`);
+        if (!response.ok) throw new Error("Failed to fetch clinic data");
+        const data = await response.json();
+        setFormData(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchClinicData();
+  }, [clinicId]);
 
   useEffect(() => {
     console.log(formData);
@@ -111,28 +115,26 @@ export default function NewClinic({ clinicId = null }) {
         : null,
     }));
   };
-  // 处理表单变化
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // 处理嵌套对象
-    if (name.includes(".")) {
-      const [parent, child] = name.split(".");
-      setFormData((prev) => ({
-        ...prev,
-        [parent]: {
-          ...prev[parent],
-          [child]: value,
-        },
-      }));
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    }
+    // if (name.includes(".")) {
+    //   const [parent, child] = name.split(".");
+    //   setFormData((prev) => ({
+    //     ...prev,
+    //     [parent]: {
+    //       ...prev[parent],
+    //       [child]: value,
+    //     },
+    //   }));
+    // } else {
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+    // }
   };
 
-  // 提交表单
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -145,8 +147,8 @@ export default function NewClinic({ clinicId = null }) {
       });
 
       if (!response.ok) throw new Error("Update failed");
-      const clinicId = response.clinicId;
-      navigate(`/clinics/${clinicId}`); // 返回详情页
+      const data = await response.json();
+      navigate(`/clinic/${data.clinicId}`);
     } catch (err) {
       setError(err.message);
     }
@@ -251,32 +253,34 @@ export default function NewClinic({ clinicId = null }) {
           </div>
 
           {/* Featured Treatment */}
-          <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
-            <h2 className="text-2xl font-semibold mb-6  font-stretch-ultra-condensed text-teal-900">
-              Featured Treatment
-            </h2>
-            {/* Select Treatment Section */}
-            <div className="grid grid-cols-1 gap-6">
-              <div>
-                <select
-                  key="select_root"
-                  value={formData.featured_treatment?.treatment_id || ""}
-                  onChange={(e) => handleTreatmentSelect(e.target.value)}
-                  className="w-full p-3 border rounded-lg bg-white"
-                >
-                  <option key="select_lable" value="">
-                    Select a treatment...
-                  </option>
-                  {treatments.map((treatment) => (
-                    <option key={treatment._id} value={treatment._id}>
-                      {treatment.treatment_title} (
-                      {formatPrice(treatment.price)})
+          {!newClinic && (
+            <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+              <h2 className="text-2xl font-semibold mb-6  font-stretch-ultra-condensed text-teal-900">
+                Featured Treatment
+              </h2>
+              {/* Select Treatment Section */}
+              <div className="grid grid-cols-1 gap-6">
+                <div>
+                  <select
+                    key="select_root"
+                    value={formData.featured_treatment?.treatment_id || ""}
+                    onChange={(e) => handleTreatmentSelect(e.target.value)}
+                    className="w-full p-3 border rounded-lg bg-white"
+                  >
+                    <option key="select_lable" value="">
+                      Select a treatment...
                     </option>
-                  ))}
-                </select>
+                    {treatments.map((treatment) => (
+                      <option key={treatment._id} value={treatment._id}>
+                        {treatment.treatment_title} (
+                        {formatPrice(treatment.price)})
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
           <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
             <h2 className="text-2xl font-semibold mb-6 font-stretch-ultra-condensed text-teal-900">
