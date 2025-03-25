@@ -5,6 +5,7 @@ import Precaution from "../components/Precaution";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext.jsx";
 import EditTreatment from "../components/EditTreatment.jsx";
+import PropTypes from "prop-types";
 
 export default function Treatment() {
   const { treatmentId } = useParams();
@@ -75,7 +76,6 @@ export default function Treatment() {
       <Header />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <article className="space-y-12">
-          {/* future implementation - image */}
           <div className="grid md:grid-cols-2 gap-6">
             {treatment.images?.map((img, index) => (
               <div
@@ -92,7 +92,6 @@ export default function Treatment() {
             ))}
           </div>
 
-          {/* 标题和信息头 */}
           <header className="space-y-6 border-b border-gray-100 pb-8">
             <div className="flex items-center gap-4">
               <h1 className="text-4xl font-bold text-gray-900 font-serif tracking-tight">
@@ -121,7 +120,6 @@ export default function Treatment() {
             </div>
           </header>
 
-          {/* 价格操作栏 */}
           <div className="sticky top-4 bg-white p-6 rounded-xl shadow-lg border border-gray-100 z-10">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
@@ -142,11 +140,8 @@ export default function Treatment() {
             </div>
           </div>
 
-          {/* 内容区块 */}
           <div className="grid lg:grid-cols-3 gap-12">
-            {/* 主内容 */}
             <div className="lg:col-span-2 space-y-12">
-              {/* 疗程描述 */}
               <section className="prose max-w-none">
                 <h2 className="flex items-center gap-3 text-2xl font-serif font-semibold text-gray-900 mb-6">
                   Treatment Overview
@@ -165,12 +160,8 @@ export default function Treatment() {
                   )}
                 </div>
               </section>
-
-              {/* 注意事项 */}
-              {/* <Precaution /> */}
             </div>
 
-            {/* 侧边栏 - 医生信息 */}
             <aside className="lg:col-span-1">
               <section className="bg-white p-6 rounded-xl shadow-md border border-gray-100 sticky top-24">
                 <h2 className="flex items-center gap-3 text-xl font-serif font-semibold text-gray-900 mb-6">
@@ -233,3 +224,26 @@ export default function Treatment() {
     </>
   );
 }
+
+EditTreatment.propTypes = {
+  treatment: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    treatment_title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    treatment_rating: PropTypes.number.isRequired,
+    treatment_sold: PropTypes.number.isRequired,
+    treatment_description: PropTypes.string.isRequired,
+    treatment_description_details: PropTypes.string,
+    images: PropTypes.arrayOf(PropTypes.string).isRequired,
+    clinic: PropTypes.string.isRequired,
+    doctor: PropTypes.shape({
+      doctor_picture_Url: PropTypes.string.isRequired,
+      doctor_name: PropTypes.string.isRequired,
+      doctor_role: PropTypes.string.isRequired,
+      clinic_name: PropTypes.string.isRequired,
+    }).isRequired,
+    owner: PropTypes.string.isRequired,
+  }).isRequired,
+  setIsEditing: PropTypes.func.isRequired,
+  setTreatment: PropTypes.func.isRequired,
+};

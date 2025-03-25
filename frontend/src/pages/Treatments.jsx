@@ -1,9 +1,10 @@
 import Header from "../components/Header";
 import TreatmentCard from "../components/TreatmentCard";
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
 export default function Treatments() {
-  const [query, setQuery] = useState("");
+  // const [query, setQuery] = useState(""); // coming soon...
   const [treatments, setTreatments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -48,7 +49,7 @@ export default function Treatments() {
             <p className="mt-2 text-lg/8 text-gray-600">
               Find the best treatment for your needs.
             </p>
-            <div className="flex items-center border border-gray-300 rounded-lg px-4 py-2 max-w-md shadow-md">
+            {/* <div className="flex items-center border border-gray-300 rounded-lg px-4 py-2 max-w-md shadow-md">
               <svg
                 className="w-5 h-5 text-gray-500 mr-2"
                 xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +71,7 @@ export default function Treatments() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
               />
-            </div>
+            </div> */}
           </div>
           <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
             {loading
@@ -89,3 +90,23 @@ export default function Treatments() {
     </>
   );
 }
+
+TreatmentCard.propTypes = {
+  treatment: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    treatment_title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    treatment_rating: PropTypes.number.isRequired,
+    treatment_sold: PropTypes.number.isRequired,
+    treatment_description: PropTypes.string.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string).isRequired,
+    clinic: PropTypes.string.isRequired,
+    doctor: PropTypes.shape({
+      doctor_picture_Url: PropTypes.string.isRequired,
+      doctor_name: PropTypes.string.isRequired,
+      doctor_role: PropTypes.string.isRequired,
+      clinic_name: PropTypes.string.isRequired,
+    }).isRequired,
+    owner: PropTypes.string.isRequired,
+  }).isRequired,
+};

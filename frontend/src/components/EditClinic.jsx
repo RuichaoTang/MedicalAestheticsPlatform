@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { formatPrice } from "../utils/utils";
 import { useAuth } from "../context/AuthContext";
+import PropTypes from "prop-types";
 
 export default function NewClinic({
   clinic = null,
@@ -284,3 +285,36 @@ export default function NewClinic({
     </>
   );
 }
+
+NewClinic.propTypes = {
+  clinic: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    clinic_name: PropTypes.string.isRequired,
+    clinic_location: PropTypes.string.isRequired,
+    clinic_location_street: PropTypes.string,
+    clinic_rating: PropTypes.number,
+    clinic_description: PropTypes.string.isRequired,
+    clinic_sold: PropTypes.number,
+    operating_hours: PropTypes.string,
+    clinic_email: PropTypes.string,
+    clinic_phone: PropTypes.string,
+    featured_treatment: PropTypes.string,
+  }),
+  setClinic: PropTypes.func,
+  setIsEditing: PropTypes.func,
+  treatments: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      treatment_title: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+    })
+  ),
+};
+
+// 设置默认值（根据你的组件参数默认值）
+NewClinic.defaultProps = {
+  clinic: null,
+  setClinic: null,
+  setIsEditing: null,
+  treatments: null,
+};

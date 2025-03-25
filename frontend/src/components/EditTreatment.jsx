@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 // import { formatPrice } from "../utils/utils";
 import { useAuth } from "../context/AuthContext";
+import PropTypes from "prop-types";
 
 export default function NewClinic({
   treatment = null,
@@ -211,3 +212,30 @@ export default function NewClinic({
     </>
   );
 }
+
+NewClinic.propTypes = {
+  treatment: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    treatment_title: PropTypes.string.isRequired,
+    treatment_description: PropTypes.string.isRequired,
+    treatment_sold: PropTypes.number,
+    treatment_rating: PropTypes.number,
+    price: PropTypes.number.isRequired,
+    doctor: PropTypes.shape({
+      doctor_id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      doctor_name: PropTypes.string,
+      clinic_name: PropTypes.string,
+      doctor_role: PropTypes.string,
+      doctor_picture_Url: PropTypes.string,
+    }),
+    clinic: PropTypes.string.isRequired,
+  }),
+  setIsEditing: PropTypes.func,
+  setTreatment: PropTypes.func,
+};
+
+NewClinic.defaultProps = {
+  treatment: null,
+  setIsEditing: null,
+  setTreatment: null,
+};

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { formatNumber, formatPrice } from "../utils/utils";
+import PropTypes from "prop-types";
 
 export default function ClinicCard({ clinic }) {
   const [featuredTreatment, setFeaturedTreatment] = useState(null);
@@ -80,3 +81,15 @@ export default function ClinicCard({ clinic }) {
     </>
   );
 }
+
+ClinicCard.propTypes = {
+  clinic: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    clinic_name: PropTypes.string.isRequired,
+    clinic_location: PropTypes.string,
+    clinic_rating: PropTypes.number.isRequired,
+    clinic_sold: PropTypes.number.isRequired,
+    clinic_description: PropTypes.string.isRequired,
+    featured_treatment: PropTypes.string,
+  }).isRequired,
+};
