@@ -199,13 +199,13 @@ export default function Treatment() {
                   onClick={() => setIsEditing(!isEditing)}
                   className="px-6 py-1.5 bg-teal-600 text-white rounded-lg hover:bg-teal-700 font-stretch-semi-condensed font-semibold"
                 >
-                  {isEditing ? "Discard Changes" : "Edit Clinic"}
+                  {isEditing ? "Discard Changes" : "Edit Treatment"}
                 </button>
                 <button
                   onClick={handleDelete}
                   className="px-6 py-1.5 bg-orange-600 text-white rounded-lg hover:bg-orange-700 font-stretch-semi-condensed font-semibold"
                 >
-                  Delete Clinic
+                  Delete Treatment
                 </button>
               </div>
             </div>
