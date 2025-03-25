@@ -14,8 +14,8 @@ export const showAllTreatments = async (req, res) => {
 };
 
 export const findOneTreatment = async (req, res) => {
-  console.log("finding one...");
-  console.log(req.params.id);
+  // console.log("finding one...");
+  // console.log(req.params.id);
   try {
     const treatmentCollection = client.db("data").collection("treatment");
     const theTreatment = await treatmentCollection.findOne({

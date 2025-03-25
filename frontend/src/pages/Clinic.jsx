@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { formatPrice, formatNumber } from "../utils/utils.jsx";
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext.jsx";
-import NewClinic from "./NewClinic";
+import EditClinic from "../components/EditClinic";
 
 export default function Treatment() {
   const { clinicId } = useParams();
@@ -13,7 +13,7 @@ export default function Treatment() {
   const [featuredTreatment, setFeaturedTreatment] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [authenticated, setAuthenticated] = useState(false);
+  // const [authenticated, setAuthenticated] = useState(false);
   const [isEditing, setIsEditing] = useState(false); // 新增编辑状态
   const navigate = useNavigate();
 
@@ -28,9 +28,7 @@ export default function Treatment() {
         if (!response.ok) throw new Error("Failed to fetch a clinic");
         const data = await response.json();
         setClinic(data);
-        if (data.owner == user._id) {
-          setAuthenticated(true);
-        }
+
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -42,10 +40,10 @@ export default function Treatment() {
     getOneClinic();
   }, [clinicId]);
 
-  // show auth state
-  useEffect(() => {
-    console.log("auth", authenticated);
-  }, [authenticated]);
+  // // show auth state
+  // useEffect(() => {
+  //   console.log("auth", authenticated);
+  // }, [authenticated]);
 
   // get the featured treatment info
   useEffect(() => {
@@ -78,12 +76,13 @@ export default function Treatment() {
   const handleDelete = async () => {
     if (window.confirm("Are you sure you want to delete this clinic?")) {
       try {
-        const response = await fetch(`/api/clinics/${clinicId}`, {
+        const response = await fetch(`/api/clinics/delete/${clinicId}`, {
           method: "DELETE",
+          credentials: "include",
         });
 
         if (!response.ok) throw new Error("Delete failed");
-        navigate("/clinics"); // 删除成功后跳转到列表页
+        navigate("/me");
       } catch (err) {
         setError("Delete failed: " + err.message);
       }
@@ -113,8 +112,8 @@ export default function Treatment() {
   return (
     <>
       <Header />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <article className="space-y-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 ">
+        <article className="space-y-12 ">
           <header className="space-y-6 border-b border-gray-100 pb-8">
             <div className="flex items-center gap-4">
               <h1 className="text-4xl font-bold text-gray-900 font-serif tracking-tight">
@@ -166,87 +165,87 @@ export default function Treatment() {
             </div>
           )}
 
-          {/* Left Part (Main) */}
-          <div className="grid lg:grid-cols-3 gap-12">
-            <div className="lg:col-span-2 space-y-8">
-              <section className="prose max-w-none">
-                <h2 className="text-2xl font-serif font-semibold text-gray-900 mb-6">
-                  About Our Clinic
-                </h2>
-                <div className="space-y-6 text-gray-600 leading-relaxed">
-                  <p className="text-lg">{clinic.clinic_description}</p>
-                </div>
-              </section>
-            </div>
+          <div className="border-b border-gray-100 pb-8">
+            {/* Left Part (Main) */}
+            <div className="grid lg:grid-cols-3 gap-12">
+              <div className="lg:col-span-2 space-y-8">
+                <section className="prose max-w-none">
+                  <h2 className="text-2xl font-serif font-semibold text-gray-900 mb-6">
+                    About Our Clinic
+                  </h2>
+                  <div className="space-y-6 text-gray-600 leading-relaxed">
+                    <p className="text-lg">{clinic.clinic_description}</p>
+                  </div>
+                </section>
+              </div>
 
-            {/* right part - contact info*/}
-            <aside className="lg:col-span-1">
-              <section className="bg-white p-6 rounded-xl shadow-md border border-gray-100 sticky top-24">
-                <h2 className="text-xl font-serif font-semibold text-gray-900 mb-6">
-                  Contact Information
-                </h2>
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="font-medium text-gray-900">Location</h3>
-                    <p className="text-gray-600">{clinic.clinic_location}</p>
-                    <p className="text-gray-600">
-                      {clinic.clinic_location_street}
-                    </p>
-                  </div>
-                  <div>
-                    <h3 className="font-medium text-gray-900">
-                      Operating Hours
-                    </h3>
-                    <p className="text-gray-600">
-                      {clinic.operating_hours || "Not provided"}
-                    </p>
-                  </div>
-                  <div>
-                    <h3 className="font-medium text-gray-900">Contact</h3>
-                    <div className="text-gray-600">
-                      {
-                        <p>
-                          {clinic.clinic_phone || "Phone Number not provided"}
-                        </p>
-                      }
-                      {<p>{clinic.clinic_email || "Email not provided"}</p>}
+              {/* right part - contact info*/}
+              <aside className="lg:col-span-1">
+                <section className="bg-white p-6 rounded-xl shadow-md border border-gray-100 sticky top-24">
+                  <h2 className="text-xl font-serif font-semibold text-gray-900 mb-6">
+                    Contact Information
+                  </h2>
+                  <div className="space-y-4">
+                    <div>
+                      <h3 className="font-medium text-gray-900">Location</h3>
+                      <p className="text-gray-600">{clinic.clinic_location}</p>
+                      <p className="text-gray-600">
+                        {clinic.clinic_location_street}
+                      </p>
+                    </div>
+                    <div>
+                      <h3 className="font-medium text-gray-900">
+                        Operating Hours
+                      </h3>
+                      <p className="text-gray-600">
+                        {clinic.operating_hours || "Not provided"}
+                      </p>
+                    </div>
+                    <div>
+                      <h3 className="font-medium text-gray-900">Contact</h3>
+                      <div className="text-gray-600">
+                        {
+                          <p>
+                            {clinic.clinic_phone || "Phone Number not provided"}
+                          </p>
+                        }
+                        {<p>{clinic.clinic_email || "Email not provided"}</p>}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </section>
-            </aside>
+                </section>
+              </aside>
+            </div>
           </div>
         </article>
-        {authenticated && (
-          <>
-            <div className="flex justify-end gap-4 mb-8">
-              <button
-                onClick={() => setIsEditing(!isEditing)}
-                className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors"
-              >
-                {isEditing ? "Cancel Edit" : "Edit Clinic"}
-              </button>
-              <button
-                onClick={handleDelete}
-                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
-              >
-                Delete Clinic
-              </button>
-            </div>
-          </>
-        )}
-        {/* 条件渲染编辑组件 */}
-        {isEditing && (
-          <div className="mb-12 border-t-2 border-teal-100 pt-8">
-            <NewClinic
+        <div className="mt-6">
+          {clinic && user.user && user.user._id == clinic.owner && (
+            <>
+              <div className="flex justify-center md:justify-start gap-4 mb-8">
+                <button
+                  onClick={() => setIsEditing(!isEditing)}
+                  className="px-6 py-1.5 bg-teal-600 text-white rounded-lg hover:bg-teal-700 font-stretch-semi-condensed font-semibold"
+                >
+                  {isEditing ? "Discard Changes" : "Edit Clinic"}
+                </button>
+                <button
+                  onClick={handleDelete}
+                  className="px-6 py-1.5 bg-orange-600 text-white rounded-lg hover:bg-orange-700 font-stretch-semi-condensed font-semibold"
+                >
+                  Delete Clinic
+                </button>
+              </div>
+            </>
+          )}
+
+          {isEditing && (
+            <EditClinic
               clinic={clinic}
-              onSuccess={() => {
-                setIsEditing(false); // 关闭编辑模式
-                // 这里可以添加数据刷新逻辑
-              }}
+              setClinic={setClinic}
+              setIsEditing={setIsEditing}
             />
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </>
   );
