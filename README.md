@@ -54,6 +54,9 @@ npm run dev
 
 ## Other Project Requirements
 - 1000+ user data implemented in mongoDB
+
+## License
+This project is licensed under the MIT License.
   
 
 
