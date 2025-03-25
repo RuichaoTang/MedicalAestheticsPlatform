@@ -4,7 +4,9 @@ function Doctors() {
   return (
     <>
       <Header />
-      <p>This is the Doctor page</p>
+      <p className="text-center">
+        Doctor related functionalities coming soon...
+      </p>
     </>
   );
 }

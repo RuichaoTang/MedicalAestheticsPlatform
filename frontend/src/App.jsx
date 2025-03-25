@@ -13,6 +13,7 @@ import NotFound from "./pages/NotFound";
 import Clinic from "./pages/Clinic";
 import NewClinic from "./pages/NewClinic";
 import { AuthProvider } from "./context/AuthContext";
+import NewTreatment from "./pages/NewTreatment";
 
 function App() {
   // const isAuthenticated = false;
@@ -33,7 +34,11 @@ function App() {
             <Route path="/doctors" element={<Doctors />} />
             <Route element={<PrivateRoute />}>
               <Route path="/me" element={<Me />} />
-              <Route path="/new-clinic" element={<NewClinic />} />
+              <Route path="/new-clinic" element={<NewClinic />} />å
+              <Route
+                path="/new-treatment/:clinicId"
+                element={<NewTreatment />}
+              />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

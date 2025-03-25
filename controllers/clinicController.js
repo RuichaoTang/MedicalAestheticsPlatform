@@ -1,7 +1,7 @@
 import { client } from "../config/db.js";
 import { ObjectId } from "mongodb";
 import jwt from "jsonwebtoken";
-import cookieParser from "cookie-parser";
+// import cookieParser from "cookie-parser";
 
 export const showAllClinics = async (req, res) => {
   try {
@@ -143,20 +143,17 @@ export const deleteClinic = async (req, res) => {
     return res.status(401).json({ message: "Authentication required" });
   }
 
-  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-    if (err) {
-      console.log(err);
-      return res.status(403).json({ message: "Invalid token" });
-    }
-    req.user = user; // 将用户信息附加到请求中
-    console.log(user);
-  });
-
+  try {
+    const user = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = user;
+  } catch (err) {
+    console.log(err);
+    return res.status(403).json({ message: "Invalid token" });
+  }
   const clinicId = req.params.id;
   console.log(clinicId);
 
   try {
-    // 查找 clinic
     const clinicCollection = client.db("data").collection("clinic");
     const clinic = await clinicCollection.findOne({
       _id: new ObjectId(clinicId),
@@ -165,16 +162,15 @@ export const deleteClinic = async (req, res) => {
       return res.status(404).json({ message: "Clinic not found" });
     }
 
-    // 验证 clinic 的 ownerId 是否与用户的 id 匹配
     if (clinic.owner.toString() !== req.user.id) {
-      // 假设 user.id 是 token 中的用户 ID
       return res.status(403).json({
         message: "Unauthorized: You are not the owner of this clinic",
       });
     }
 
-    // 删除 clinic
-    await clinic.remove();
+    await clinicCollection.deleteOne({
+      _id: new ObjectId(clinicId),
+    });
     console.log("succ");
     res.status(200).json({ message: "Clinic deleted successfully" });
   } catch (err) {

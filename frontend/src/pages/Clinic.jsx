@@ -4,6 +4,7 @@ import { formatPrice, formatNumber } from "../utils/utils.jsx";
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext.jsx";
 import EditClinic from "../components/EditClinic";
+import TreatmentCard from "../components/TreatmentCard.jsx";
 
 export default function Treatment() {
   const { clinicId } = useParams();
@@ -11,10 +12,10 @@ export default function Treatment() {
   const user = useAuth();
   const [clinic, setClinic] = useState({});
   const [featuredTreatment, setFeaturedTreatment] = useState(null);
+  const [allTreatments, setAllTreatments] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  // const [authenticated, setAuthenticated] = useState(false);
-  const [isEditing, setIsEditing] = useState(false); // 新增编辑状态
+  const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
 
   // get the clinic info
@@ -52,7 +53,7 @@ export default function Treatment() {
       return;
     }
 
-    const fetchTreatment = async () => {
+    const fetchFeaturedTreatment = async () => {
       try {
         // console.log(clinic.featured_treatment);
         const response = await fetch(
@@ -70,8 +71,40 @@ export default function Treatment() {
       }
     };
 
-    fetchTreatment();
+    fetchFeaturedTreatment();
   }, [clinic]);
+
+  // get all treatment info
+  useEffect(() => {
+    // console.log("here");
+    if (!clinic) {
+      return;
+    }
+
+    const fetchAllTreatments = async () => {
+      try {
+        // console.log(clinic.featured_treatment);
+        const response = await fetch(
+          `/api/treatments/treatmentByClinic/${clinicId}`
+        );
+        // console.log(response);
+        if (!response.ok) {
+          throw new Error("Failed to fetch all treatments 1");
+        }
+        const data = await response.json();
+        console.log("all", data);
+        setAllTreatments(data);
+      } catch (error) {
+        console.error("Error fetching all treatments:", error);
+      }
+    };
+
+    fetchAllTreatments();
+  }, [clinic]);
+
+  const handleNewTreatment = async () => {
+    navigate(`/new-treatment/${clinicId}`);
+  };
 
   const handleDelete = async () => {
     if (window.confirm("Are you sure you want to delete this clinic?")) {
@@ -138,7 +171,7 @@ export default function Treatment() {
           </header>
 
           {/* Featured Treatment*/}
-          {featuredTreatment && (
+          {featuredTreatment && clinic.featured_treatment && (
             <div className="sticky top-4 bg-white p-6 rounded-xl shadow-lg border border-gray-100 z-10">
               <div className="flex items-center justify-between">
                 <div className="space-y-2">
@@ -216,11 +249,32 @@ export default function Treatment() {
                 </section>
               </aside>
             </div>
+            <section>
+              <h2 className="text-2xl font-serif font-semibold text-gray-900 mb-1 mt-8">
+                All Treatments
+              </h2>
+              <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-gray-200 mb-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+                {loading ? (
+                  "Loading..."
+                ) : error ? (
+                  error
+                ) : !allTreatments ? (
+                  <></>
+                ) : (
+                  allTreatments.map((treatment) => (
+                    <TreatmentCard
+                      treatment={treatment}
+                      key={`cardId${treatment._id}`}
+                    />
+                  ))
+                )}
+              </div>
+            </section>
           </div>
         </article>
         <div className="mt-6">
           {clinic && user.user && user.user._id == clinic.owner && (
-            <>
+            <div className="">
               <div className="flex justify-center md:justify-start gap-4 mb-8">
                 <button
                   onClick={() => setIsEditing(!isEditing)}
@@ -234,8 +288,14 @@ export default function Treatment() {
                 >
                   Delete Clinic
                 </button>
+                <button
+                  onClick={handleNewTreatment}
+                  className="ml-auto px-6 py-1.5 bg-teal-600 text-white rounded-lg hover:bg-teal-700 font-stretch-semi-condensed font-semibold"
+                >
+                  New Treatment
+                </button>
               </div>
-            </>
+            </div>
           )}
 
           {isEditing && (
@@ -243,6 +303,7 @@ export default function Treatment() {
               clinic={clinic}
               setClinic={setClinic}
               setIsEditing={setIsEditing}
+              treatments={allTreatments}
             />
           )}
         </div>
