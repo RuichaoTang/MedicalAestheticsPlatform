@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import { useAuth } from "../context/AuthContext";
 import ClinicCard from "../components/ClinicCard";
+import PropTypes from "prop-types";
 
 export default function Me() {
   const [activeTab, setActiveTab] = useState("clinics");
@@ -142,3 +143,19 @@ export default function Me() {
     </>
   );
 }
+
+ClinicCard.propTypes = {
+  clinic: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    clinic_name: PropTypes.string.isRequired,
+    clinic_location: PropTypes.string.isRequired,
+    clinic_rating: PropTypes.number.isRequired,
+    clinic_sold: PropTypes.number.isRequired,
+    clinic_description: PropTypes.string.isRequired,
+    clinic_phone: PropTypes.string,
+    clinic_email: PropTypes.string,
+    featured_treatment: PropTypes.string,
+    clinic_location_street: PropTypes.string,
+    operating_hours: PropTypes.string,
+  }).isRequired,
+};

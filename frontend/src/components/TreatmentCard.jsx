@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { formatNumber, formatPrice } from "../utils/utils";
+import PropTypes from "prop-types";
 export default function ClinicCard({ treatment }) {
   return (
     <>
@@ -51,3 +52,22 @@ export default function ClinicCard({ treatment }) {
     </>
   );
 }
+
+ClinicCard.propTypes = {
+  treatment: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    treatment_title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    treatment_rating: PropTypes.number.isRequired,
+    treatment_sold: PropTypes.number.isRequired,
+    treatment_description: PropTypes.string.isRequired,
+    doctor: PropTypes.shape({
+      doctor_picture_Url: PropTypes.string.isRequired,
+      doctor_id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+        .isRequired,
+      doctor_name: PropTypes.string.isRequired,
+      doctor_role: PropTypes.string.isRequired,
+      clinic_name: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+};

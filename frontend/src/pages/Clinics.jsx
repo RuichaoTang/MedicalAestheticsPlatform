@@ -1,6 +1,7 @@
 import Header from "../components/Header";
 import ClinicCard from "../components/ClinicCard";
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
 export default function Clinics() {
   // const [query, setQuery] = useState(""); //coming soon...
@@ -90,3 +91,19 @@ export default function Clinics() {
     </>
   );
 }
+
+ClinicCard.propTypes = {
+  clinic: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    clinic_name: PropTypes.string.isRequired,
+    clinic_location: PropTypes.string.isRequired,
+    clinic_rating: PropTypes.number.isRequired,
+    clinic_sold: PropTypes.number.isRequired,
+    clinic_description: PropTypes.string.isRequired,
+    clinic_phone: PropTypes.string,
+    clinic_email: PropTypes.string,
+    featured_treatment: PropTypes.string,
+    clinic_location_street: PropTypes.string,
+    operating_hours: PropTypes.string,
+  }).isRequired,
+};

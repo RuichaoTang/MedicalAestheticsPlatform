@@ -5,6 +5,7 @@ import Precaution from "../components/Precaution";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext.jsx";
 import EditTreatment from "../components/EditTreatment.jsx";
+import PropTypes from "prop-types";
 
 export default function Treatment() {
   const { treatmentId } = useParams();
@@ -223,3 +224,26 @@ export default function Treatment() {
     </>
   );
 }
+
+EditTreatment.propTypes = {
+  treatment: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    treatment_title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    treatment_rating: PropTypes.number.isRequired,
+    treatment_sold: PropTypes.number.isRequired,
+    treatment_description: PropTypes.string.isRequired,
+    treatment_description_details: PropTypes.string,
+    images: PropTypes.arrayOf(PropTypes.string).isRequired,
+    clinic: PropTypes.string.isRequired,
+    doctor: PropTypes.shape({
+      doctor_picture_Url: PropTypes.string.isRequired,
+      doctor_name: PropTypes.string.isRequired,
+      doctor_role: PropTypes.string.isRequired,
+      clinic_name: PropTypes.string.isRequired,
+    }).isRequired,
+    owner: PropTypes.string.isRequired,
+  }).isRequired,
+  setIsEditing: PropTypes.func.isRequired,
+  setTreatment: PropTypes.func.isRequired,
+};
