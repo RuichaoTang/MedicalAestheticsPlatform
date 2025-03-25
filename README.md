@@ -54,6 +54,7 @@ npm run dev
 
 ## Other Project Requirements
 - 1000+ user data implemented in mongoDB
+![DB Screenshot](https://github.com/RuichaoTang/MedicalAestheticsPlatform/blob/main/resources/db_screenshot.png?raw=true)
 
 ## License
 This project is licensed under the MIT License.
