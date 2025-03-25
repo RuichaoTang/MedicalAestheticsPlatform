@@ -10,7 +10,6 @@ import {
 
 const router = express.Router();
 
-// 检查登录状态接口
 router.get("/all", showAllTreatments);
 router.get("/:id", findOneTreatment);
 router.get("/treatmentByClinic/:id", searchByClinic);

@@ -7,7 +7,7 @@ import ClinicCard from "../components/ClinicCard";
 export default function Me() {
   const [activeTab, setActiveTab] = useState("clinics");
   const [clinics, setClinics] = useState([]);
-  const [orders, setOrders] = useState([]); // to be continued...
+  // const [orders, setOrders] = useState([]); // coming soon...
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -86,12 +86,11 @@ export default function Me() {
                     : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
                 }`}
               >
-                My History Orders ({orders.length})
+                {/* My History Orders ({orders.length}) */}
               </button>
             </nav>
           </div>
 
-          {/* Main content */}
           {loading ? (
             <div className="flex justify-center items-center h-64">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
@@ -102,7 +101,6 @@ export default function Me() {
             </div>
           ) : (
             <>
-              {/* Clinic List */}
               {activeTab === "clinics" && (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {clinics.length > 0 ? (
@@ -120,10 +118,10 @@ export default function Me() {
                 </div>
               )}
 
-              {/* Order History */}
+              {/* Order History
               {activeTab === "orders" && (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {/* {orders.length > 0 ? (
+                  {orders.length > 0 ? (
                     orders.map(() => (
                       // add a order history in the future.
                       <></>
@@ -134,9 +132,9 @@ export default function Me() {
                         You don't have any order history.
                       </p>
                     </div>
-                  )} */}
+                  )}
                 </div>
-              )}
+              )} */}
             </>
           )}
         </div>
