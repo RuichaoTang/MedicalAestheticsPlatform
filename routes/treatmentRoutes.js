@@ -6,11 +6,13 @@ import {
   newTreatment,
   deleteTreatment,
   editTreatment,
+  searchTreatments,
 } from "../controllers/treatmentController.js";
 
 const router = express.Router();
 
 router.get("/all", showAllTreatments);
+router.get("/search", searchTreatments);
 router.get("/:id", findOneTreatment);
 router.get("/treatmentByClinic/:id", searchByClinic);
 router.post("/new-treatment/:clinicId", newTreatment);

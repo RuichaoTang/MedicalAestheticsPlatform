@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 export default function Treatments() {
-  // const [query, setQuery] = useState(""); // coming soon...
+  const [query, setQuery] = useState("");
   const [treatments, setTreatments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -37,19 +37,46 @@ export default function Treatments() {
     console.log("error", error);
   }, []);
 
+  const handleSearch = async () => {
+    console.log("searching");
+    setError(null);
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `/api/treatments/search?q=${encodeURIComponent(query)}`
+      );
+      const data = await response.json();
+
+      console.log(data);
+
+      if (!response.ok) {
+        setError(data.message);
+        setLoading(false);
+        return;
+      }
+      setTreatments(data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error searching treatments:", error);
+      setError(error.message);
+      setLoading(false);
+    }
+    console.log(treatments);
+  };
+
   return (
     <>
       <Header />
       <div className="bg-white py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:mx-0">
-            <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">
+            <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl text-center sm:text-start">
               Choose a Treatment
             </h2>
-            <p className="mt-2 text-lg/8 text-gray-600">
+            <p className="mt-2 text-lg/8 text-gray-600 text-center sm:text-start">
               Find the best treatment for your needs.
             </p>
-            {/* <div className="flex items-center border border-gray-300 rounded-lg px-4 py-2 max-w-md shadow-md">
+            <div className="flex items-center border border-gray-300 rounded-lg px-4 py-2 w-full sm:max-w-md shadow-md">
               <svg
                 className="w-5 h-5 text-gray-500 mr-2"
                 xmlns="http://www.w3.org/2000/svg"
@@ -70,20 +97,31 @@ export default function Treatments() {
                 className="w-full outline-none bg-transparent text-gray-700 placeholder-gray-400"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleSearch();
+                  }
+                }}
               />
-            </div> */}
+              <button
+                onClick={handleSearch}
+                className="px-4 text-teal-800 rounded-lg font-semibold hover:bg-teal-100 transition duration-300 ease-in-out"
+              >
+                Search
+              </button>
+            </div>
           </div>
           <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
             {loading
               ? "Loading..."
               : error
-                ? error
-                : treatments.map((treatment) => (
-                    <TreatmentCard
-                      treatment={treatment}
-                      key={`cardId${treatment._id}`}
-                    />
-                  ))}
+              ? error
+              : treatments.map((treatment) => (
+                  <TreatmentCard
+                    treatment={treatment}
+                    key={`cardId${treatment._id}`}
+                  />
+                ))}
           </div>
         </div>
       </div>

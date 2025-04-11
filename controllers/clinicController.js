@@ -178,3 +178,27 @@ export const deleteClinic = async (req, res) => {
     res.status(500).json({ message: "Delete failed", error: err.message });
   }
 };
+
+export const searchClinics = async (req, res) => {
+  try {
+    const query = req.query.q;
+    console.log("searching for:", query);
+    const clinicCollection = client.db("data").collection("clinic");
+
+    const results = await clinicCollection
+      .find({
+        $or: [
+          { clinic_name: { $regex: query, $options: "i" } },
+          { clinic_description: { $regex: query, $options: "i" } },
+          { clinic_location: { $regex: query, $options: "i" } },
+        ],
+      })
+      .sort({ clinic_rating: -1 })
+      .toArray();
+
+    res.json(results);
+  } catch (err) {
+    console.error("Search Error:", err);
+    res.status(500).json({ error: "Server Error." });
+  }
+};
