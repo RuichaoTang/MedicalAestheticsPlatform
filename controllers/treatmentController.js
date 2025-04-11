@@ -170,3 +170,26 @@ export const editTreatment = async (req, res) => {
     res.status(500).json({ error: "Failed to update treatment" });
   }
 };
+
+export const searchTreatments = async (req, res) => {
+  try {
+    const query = req.query.q;
+    console.log("searching for:", query);
+    const clinicCollection = client.db("data").collection("treatment");
+
+    const results = await clinicCollection
+      .find({
+        $or: [
+          { treatment_title: { $regex: query, $options: "i" } },
+          { description: { $regex: query, $options: "i" } },
+        ],
+      })
+      .sort({ treatment_rating: -1 })
+      .toArray();
+
+    res.json(results);
+  } catch (err) {
+    console.error("Search Error:", err);
+    res.status(500).json({ error: "Server Error." });
+  }
+};

@@ -28,11 +28,11 @@ const products = [
     description: "Locate a trust worthy medical aesthetic center",
     href: "/clinics",
   },
-  {
-    name: "Doctors",
-    description: "Find a reputable doctor or operator",
-    href: "/doctors",
-  },
+  // {
+  //   name: "Doctors",
+  //   description: "Find a reputable doctor or operator",
+  //   href: "/doctors",
+  // },
 ];
 
 export default function Header() {

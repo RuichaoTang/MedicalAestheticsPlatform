@@ -6,11 +6,13 @@ import {
   newClinic,
   editClinic,
   deleteClinic,
+  searchClinics,
 } from "../controllers/clinicController.js";
 
 const router = express.Router();
 
 router.get("/all", showAllClinics);
+router.get("/search", searchClinics);
 router.get("/:id", findOneClinic);
 router.get("/clinicsByUser/:id", searchByOwner);
 router.post("/new-clinic", newClinic);

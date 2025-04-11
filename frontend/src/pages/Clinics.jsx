@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 export default function Clinics() {
-  // const [query, setQuery] = useState(""); //coming soon...
+  const [query, setQuery] = useState("");
   const [clinics, setClinics] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -37,6 +37,33 @@ export default function Clinics() {
     console.log("error", error);
   }, []);
 
+  const handleSearch = async () => {
+    console.log("searching");
+    setError(null);
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `/api/clinics/search?q=${encodeURIComponent(query)}`
+      );
+      const data = await response.json();
+
+      console.log(data);
+
+      if (!response.ok) {
+        setError(data.message);
+        setLoading(false);
+        return;
+      }
+      setClinics(data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error searching clinics:", error);
+      setError(error.message);
+      setLoading(false);
+    }
+    // console.log(clinics);
+  };
+
   return (
     <>
       <Header />
@@ -50,9 +77,7 @@ export default function Clinics() {
               Locate a trust worthy medical aesthetic center near you.
             </p>
 
-            {
-              // future implementation
-              /* <div className="flex items-center border border-gray-300 rounded-lg px-4 py-2 max-w-md shadow-md">
+            <div className="flex items-center border border-gray-300 rounded-lg px-4 py-2 w-full sm:max-w-md shadow-md">
               <svg
                 className="w-5 h-5 text-gray-500 mr-2"
                 xmlns="http://www.w3.org/2000/svg"
@@ -73,9 +98,19 @@ export default function Clinics() {
                 className="w-full outline-none bg-transparent text-gray-700 placeholder-gray-400"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleSearch();
+                  }
+                }}
               />
-            </div> */
-            }
+              <button
+                onClick={handleSearch}
+                className="px-4 text-teal-800 rounded-lg font-semibold hover:bg-teal-100 transition duration-300 ease-in-out"
+              >
+                Search
+              </button>
+            </div>
           </div>
           <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
             {loading ? (
