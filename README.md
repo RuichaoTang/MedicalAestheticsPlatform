@@ -9,6 +9,9 @@ It is a website aiming to offer transparent prices of medical aesthetic services
 ## Class Link
 - https://johnguerra.co/classes/webDevelopment_spring_2025/
 
+## Usability Study Recording
+- https://youtu.be/8_AEPdJ0E4Q
+
 ## Design Doc
 - https://github.com/RuichaoTang/MedicalAestheticsPlatform/blob/main/resources/Hydrogen%20-%20Design%20Doc.pdf
 
