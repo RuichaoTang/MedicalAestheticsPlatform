@@ -36,7 +36,6 @@ It is a website aiming to offer transparent prices of medical aesthetic services
 ![Updating Page Screenshot](https://github.com/RuichaoTang/MedicalAestheticsPlatform/blob/main/resources/截屏2025-03-25%2005.08.13.png?raw=true)
 
 
-
 ## Instructions to build
 - In The First Teminal (Backend)
 ```bash
@@ -54,6 +53,9 @@ npm run dev
 ```
 -Note that .env file is not uploaded
 
+
+## The Usability Report
+- https://docs.google.com/document/d/1OWbV4gzgnXB1Z11YhJveAGfjFSMqDCCKxz75p7ZRGhg/edit?usp=sharing
 
 ## Other Project Requirements
 - 1000+ user data implemented in mongoDB
