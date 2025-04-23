@@ -162,6 +162,8 @@ export default function NewClinic({
                     <input
                       type="text"
                       name="treatment_title"
+                      placeholder="Enter treatment name..."
+                      id="treatment_title"
                       value={formData.treatment_title}
                       onChange={handleChange}
                       className="w-full p-3 border rounded-lg"
@@ -240,7 +242,10 @@ export default function NewClinic({
                     )}
                   </div>
                   <label className="cursor-pointer">
-                    <span className="px-4 py-2 bg-teal-50 text-teal-700 rounded-lg hover:bg-teal-100 transition-colors border border-teal-200">
+                    <span
+                      className="px-4 py-2 bg-teal-50 text-teal-700 rounded-lg hover:bg-teal-100 transition-colors border border-teal-200"
+                      tabIndex="0"
+                    >
                       Upload Photo
                     </span>
                     <input

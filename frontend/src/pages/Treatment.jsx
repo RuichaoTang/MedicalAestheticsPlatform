@@ -93,18 +93,21 @@ export default function Treatment() {
 
           <header className="space-y-6 border-b border-gray-100 pb-8">
             <div className="flex items-center gap-4">
-              <h1 className="text-4xl font-bold text-gray-900 font-serif tracking-tight">
+              <h1
+                className="text-4xl font-bold text-gray-900 font-serif tracking-tight"
+                tabIndex="0"
+              >
                 {treatment.treatment_title}
               </h1>
             </div>
 
             <div className="flex flex-wrap gap-3">
               <div className="flex items-center bg-white px-4 py-2 rounded-full shadow-sm border border-gray-100">
-                <span className="text-teal-700 font-semibold">
+                <span className="text-teal-700 font-semibold" tabIndex="0">
                   Rating: {treatment.treatment_rating}
                 </span>
                 <span className="text-gray-400 mx-2">|</span>
-                <span className="text-gray-600 font-semibold">
+                <span className="text-gray-600 font-semibold" tabIndex="0">
                   {formatNumber(treatment.treatment_sold)} Sold
                 </span>
               </div>
@@ -122,12 +125,12 @@ export default function Treatment() {
           <div className="sticky top-4 bg-white p-6 rounded-xl shadow-lg border border-gray-100 z-10">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <div>
-                  <p className="text-sm text-gray-500">Total Price</p>
+                <lable className="text-sm text-gray-500" tabIndex="0">
+                  Total Price
                   <p className="text-2xl md:text-3xl font-bold text-gray-900">
                     {formatPrice(treatment.price)}
                   </p>
-                </div>
+                </lable>
               </div>
 
               <button
@@ -141,7 +144,7 @@ export default function Treatment() {
 
           <div className="grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2 space-y-12">
-              <section className="prose max-w-none">
+              <section className="prose max-w-none" tabIndex="0">
                 <h2 className="flex items-center gap-3 text-2xl font-serif font-semibold text-gray-900 mb-6">
                   Treatment Overview
                 </h2>
@@ -162,7 +165,10 @@ export default function Treatment() {
             </div>
 
             <aside className="lg:col-span-1">
-              <section className="bg-white p-6 rounded-xl shadow-md border border-gray-100 sticky top-24">
+              <section
+                className="bg-white p-6 rounded-xl shadow-md border border-gray-100 sticky top-24"
+                tabIndex="0"
+              >
                 <h2 className="flex items-center gap-3 text-xl font-serif font-semibold text-gray-900 mb-6">
                   Treatment Specialist
                 </h2>

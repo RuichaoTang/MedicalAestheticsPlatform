@@ -150,21 +150,27 @@ export default function Treatment() {
         <article className="space-y-12 ">
           <header className="space-y-6 border-b border-gray-100 pb-8">
             <div className="flex items-center gap-4">
-              <h1 className="text-4xl font-bold text-gray-900 font-serif tracking-tight">
+              <h1
+                className="text-4xl font-bold text-gray-900 font-serif tracking-tight"
+                tabIndex="0"
+              >
                 {clinic.clinic_name}
               </h1>
-              <span className="bg-teal-50/50 text-teal-800 px-4 py-1 rounded-full text-sm font-medium">
+              <span
+                className="bg-teal-50/50 text-teal-800 px-4 py-1 rounded-full text-sm font-medium"
+                tabIndex="0"
+              >
                 {clinic.clinic_location}
               </span>
             </div>
 
             <div className="flex flex-wrap gap-3">
               <div className="flex items-center bg-white px-4 py-2 rounded-full shadow-sm border border-gray-100">
-                <span className="text-teal-700 font-semibold">
+                <span className="text-teal-700 font-semibold" tabIndex="0">
                   Rating: {clinic.clinic_rating}
                 </span>
                 <span className="text-gray-400 mx-2">|</span>
-                <span className="text-gray-600 font-semibold">
+                <span className="text-gray-600 font-semibold" tabIndex="0">
                   {formatNumber(clinic.clinic_sold)} Services Booked
                 </span>
               </div>
@@ -175,7 +181,7 @@ export default function Treatment() {
           {featuredTreatment && clinic.featured_treatment && (
             <div className="sticky top-4 bg-white p-6 rounded-xl shadow-lg border border-gray-100 z-10">
               <div className="flex items-center justify-between">
-                <div className="space-y-2">
+                <article className="space-y-2" tabIndex="0">
                   <h3 className="text-lg font-semibold text-gray-900">
                     Featured Treatment
                   </h3>
@@ -187,7 +193,7 @@ export default function Treatment() {
                       {formatPrice(featuredTreatment.price)}
                     </p>
                   </div>
-                </div>
+                </article>
                 <Link
                   to={`/treatment/${featuredTreatment._id}`}
                   className="bg-teal-700 hover:bg-teal-800 text-white px-6 py-3 rounded-xl transition-all 
@@ -203,7 +209,7 @@ export default function Treatment() {
             {/* Left Part (Main) */}
             <div className="grid lg:grid-cols-3 gap-12">
               <div className="lg:col-span-2 space-y-8">
-                <section className="prose max-w-none">
+                <section className="prose max-w-none" tabIndex="0">
                   <h2 className="text-2xl font-serif font-semibold text-gray-900 mb-6">
                     About Our Clinic
                   </h2>
@@ -215,7 +221,10 @@ export default function Treatment() {
 
               {/* right part - contact info*/}
               <aside className="lg:col-span-1">
-                <section className="bg-white p-6 rounded-xl shadow-md border border-gray-100 sticky top-24">
+                <section
+                  className="bg-white p-6 rounded-xl shadow-md border border-gray-100 sticky top-24"
+                  tabIndex="0"
+                >
                   <h2 className="text-xl font-serif font-semibold text-gray-900 mb-6">
                     Contact Information
                   </h2>
