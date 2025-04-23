@@ -69,41 +69,41 @@ export default function About() {
           </div>
         </div>
         <ul
-          role="contact-info"
+          aria-label="Contact Information"
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4 max-w-7xl mx-auto"
         >
-          <div className="bg-gray-100 rounded-2xl h-32 p-5">
+          <li className="bg-gray-100 rounded-2xl h-32 p-5">
             <h3 className="text-base/7 font-semibold tracking-tight text-gray-900">
               Say Hello:
             </h3>
             <p className="text-sm/6 font-semibold text-teal-700">
               tangrich@outlook.com
             </p>
-          </div>
-          <div className="bg-gray-100 rounded-2xl h-32 p-5">
+          </li>
+          <li className="bg-gray-100 rounded-2xl h-32 p-5">
             <h3 className="text-base/7 font-semibold tracking-tight text-gray-900">
               Join Our team:
             </h3>
             <p className="text-sm/6 font-semibold text-teal-700">
               tangrich@outlook.com
             </p>
-          </div>
-          <div className="bg-gray-100 rounded-2xl h-32 p-5">
+          </li>
+          <li className="bg-gray-100 rounded-2xl h-32 p-5">
             <h3 className="text-base/7 font-semibold tracking-tight text-gray-900">
               Colaborate:
             </h3>
             <p className="text-sm/6 font-semibold text-teal-700">
               tangrich@outlook.com
             </p>
-          </div>
-          <div className="bg-gray-100 rounded-2xl h-32 p-5">
+          </li>
+          <li className="bg-gray-100 rounded-2xl h-32 p-5">
             <h3 className="text-base/7 font-semibold tracking-tight text-gray-900">
               Advertisement:
             </h3>
             <p className="text-sm/6 font-semibold text-teal-700">
               tangrich@outlook.com
             </p>
-          </div>
+          </li>
         </ul>
       </div>
     </>

@@ -153,7 +153,7 @@ export default function Treatment() {
               <h1 className="text-4xl font-bold text-gray-900 font-serif tracking-tight">
                 {clinic.clinic_name}
               </h1>
-              <span className="bg-teal-100 text-teal-800 px-4 py-1 rounded-full text-sm font-medium">
+              <span className="bg-teal-50/50 text-teal-800 px-4 py-1 rounded-full text-sm font-medium">
                 {clinic.clinic_location}
               </span>
             </div>
@@ -279,19 +279,19 @@ export default function Treatment() {
               <div className="flex justify-center md:justify-start gap-4 mb-8">
                 <button
                   onClick={() => setIsEditing(!isEditing)}
-                  className="px-6 py-1.5 bg-teal-600 text-white rounded-lg hover:bg-teal-700 font-stretch-semi-condensed font-semibold"
+                  className="px-6 py-1.5 bg-teal-700 text-white rounded-lg hover:bg-teal-800 font-stretch-semi-condensed font-semibold"
                 >
                   {isEditing ? "Discard Changes" : "Edit Clinic"}
                 </button>
                 <button
                   onClick={handleDelete}
-                  className="px-6 py-1.5 bg-orange-600 text-white rounded-lg hover:bg-orange-700 font-stretch-semi-condensed font-semibold"
+                  className="px-6 py-1.5 bg-orange-700 text-white rounded-lg hover:bg-orange-800 font-stretch-semi-condensed font-semibold"
                 >
                   Delete Clinic
                 </button>
                 <button
                   onClick={handleNewTreatment}
-                  className="ml-auto px-6 py-1.5 bg-teal-600 text-white rounded-lg hover:bg-teal-700 font-stretch-semi-condensed font-semibold"
+                  className="ml-auto px-6 py-1.5 bg-teal-700 text-white rounded-lg hover:bg-teal-800 font-stretch-semi-condensed font-semibold"
                 >
                   New Treatment
                 </button>

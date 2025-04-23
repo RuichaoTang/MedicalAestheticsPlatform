@@ -122,7 +122,7 @@ export default function NewClinic({
 
   return (
     <>
-      <div className="w-full bg-teal-800 min-h-screen">
+      <div className="w-full bg-teal-50/50 min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <form onSubmit={handleSubmit} className="space-y-8">
             {/* Basic Clinic Info */}
@@ -135,75 +135,75 @@ export default function NewClinic({
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Clinic Name
+                    <input
+                      type="text"
+                      name="clinic_name"
+                      value={formData.clinic_name}
+                      onChange={handleChange}
+                      className="w-full p-3 border rounded-lg"
+                      required
+                    />
                   </label>
-                  <input
-                    type="text"
-                    name="clinic_name"
-                    value={formData.clinic_name}
-                    onChange={handleChange}
-                    className="w-full p-3 border rounded-lg"
-                    required
-                  />
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Location (City)
+                    <input
+                      type="text"
+                      name="clinic_location"
+                      value={formData.clinic_location}
+                      onChange={handleChange}
+                      className="w-full p-3 border rounded-lg"
+                      required
+                    />
                   </label>
-                  <input
-                    type="text"
-                    name="clinic_location"
-                    value={formData.clinic_location}
-                    onChange={handleChange}
-                    className="w-full p-3 border rounded-lg"
-                    required
-                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Street Location
+                    <input
+                      type="text"
+                      name="clinic_location_street"
+                      value={formData.clinic_location_street}
+                      onChange={handleChange}
+                      className="w-full p-3 border rounded-lg"
+                      required
+                    />
                   </label>
-                  <input
-                    type="text"
-                    name="clinic_location_street"
-                    value={formData.clinic_location_street}
-                    onChange={handleChange}
-                    className="w-full p-3 border rounded-lg"
-                    required
-                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Email:
+                    <input
+                      type="text"
+                      name="clinic_email"
+                      value={formData.clinic_email}
+                      onChange={handleChange}
+                      className="w-full p-3 border rounded-lg"
+                      required
+                    />
                   </label>
-                  <input
-                    type="text"
-                    name="clinic_email"
-                    value={formData.clinic_email}
-                    onChange={handleChange}
-                    className="w-full p-3 border rounded-lg"
-                    required
-                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Phone:
+                    <input
+                      type="text"
+                      name="clinic_phone"
+                      value={formData.clinic_phone}
+                      onChange={handleChange}
+                      className="w-full p-3 border rounded-lg"
+                      required
+                    />
                   </label>
-                  <input
-                    type="text"
-                    name="clinic_phone"
-                    value={formData.clinic_phone}
-                    onChange={handleChange}
-                    className="w-full p-3 border rounded-lg"
-                    required
-                  />
                 </div>
               </div>
             </div>
 
             <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
               <h2 className="text-2xl font-semibold mb-6 font-stretch-ultra-condensed text-teal-900">
-                Description
+                Clinic Description
               </h2>
               <textarea
                 name="clinic_description"
@@ -246,14 +246,14 @@ export default function NewClinic({
 
             <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
               <h2 className="text-2xl font-semibold mb-6 font-stretch-ultra-condensed text-teal-900">
-                Operating Hours
+                Clinic Open Hours
               </h2>
               <textarea
                 name="operating_hours"
                 value={formData.operating_hours}
                 onChange={handleChange}
                 className="w-full p-3 border rounded-lg h-48"
-                placeholder="Enter operating hours..."
+                placeholder="Enter clinic open hours..."
                 required
               />
             </div>
@@ -274,7 +274,7 @@ export default function NewClinic({
               </button>
               <button
                 type="submit"
-                className="px-6 py-1.5 bg-teal-600 text-white rounded-lg hover:bg-teal-700 font-stretch-semi-condensed font-semibold"
+                className="px-6 py-1.5 bg-teal-700 text-white rounded-lg hover:bg-teal-800 font-stretch-semi-condensed font-semibold"
               >
                 Submit
               </button>

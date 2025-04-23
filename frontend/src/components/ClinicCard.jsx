@@ -37,7 +37,7 @@ export default function ClinicCard({ clinic }) {
     <>
       <article
         key={clinic.clinic_id}
-        className="flex max-w-xl flex-col items-start justify-between p-6 shadow-sm"
+        className="flex max-w-xl flex-col items-start justify-between p-6 bg-white shadow-xs rounded-lg"
       >
         <div className="group relative w-full">
           <h3 className="mt-3 text-lg/6  text-gray-900 group-hover:text-gray-600 font-serif">
@@ -50,7 +50,7 @@ export default function ClinicCard({ clinic }) {
             <div className="basis-1/3 relative z-10  py-1.5 font-semibold text-slate-600 text-start">
               {clinic.clinic_location ? clinic.clinic_location : "N/A"}
             </div>
-            <div className="text-orange-600 font-semibold basis-1/3">
+            <div className="text-orange-700 font-semibold basis-1/3">
               Rating: {clinic.clinic_rating}
             </div>
             <div className="text-gray-600 font-semibold basis-1/3 text-end">
@@ -67,7 +67,7 @@ export default function ClinicCard({ clinic }) {
               <p className="font-semibold text-gray-900 font-stretch-semi-condensed">
                 Featured Treatment:
               </p>
-              <p className="font-semibold text-emerald-700">
+              <p className="font-semibold text-emerald-800">
                 <Link to={`/treatment/${featuredTreatment._id}`}>
                   <span className="absolute inset-0" />
                   {featuredTreatment.treatment_title} -{" "}

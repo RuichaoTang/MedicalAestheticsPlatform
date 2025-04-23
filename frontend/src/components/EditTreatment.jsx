@@ -146,7 +146,7 @@ export default function NewClinic({
 
   return (
     <>
-      <div className="w-full bg-teal-800 min-h-screen">
+      <div className="w-full bg-teal-50/50 min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <form onSubmit={handleSubmit} className="space-y-8">
             {/* Basic Clinic Info */}
@@ -159,43 +159,46 @@ export default function NewClinic({
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Treatment Name
+                    <input
+                      type="text"
+                      name="treatment_title"
+                      value={formData.treatment_title}
+                      onChange={handleChange}
+                      className="w-full p-3 border rounded-lg"
+                      required
+                    />
                   </label>
-                  <input
-                    type="text"
-                    name="treatment_title"
-                    value={formData.treatment_title}
-                    onChange={handleChange}
-                    className="w-full p-3 border rounded-lg"
-                    required
-                  />
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Price
+                    <input
+                      type="number"
+                      name="price"
+                      value={formData.price}
+                      onChange={handleChange}
+                      className="w-full p-3 border rounded-lg"
+                      required
+                      min="0"
+                      step="0.01"
+                      placeholder="Enter price..."
+                    />
                   </label>
-                  <input
-                    type="number"
-                    name="price"
-                    value={formData.price}
-                    onChange={handleChange}
-                    className="w-full p-3 border rounded-lg"
-                    required
-                  />
                 </div>
               </div>
             </div>
 
             <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
               <h2 className="text-2xl font-semibold mb-6 font-stretch-ultra-condensed text-teal-900">
-                Description
+                Treatment Description
               </h2>
               <textarea
                 name="treatment_description"
                 value={formData.treatment_description}
                 onChange={handleChange}
                 className="w-full p-3 border rounded-lg h-48"
-                placeholder="Enter clinic description..."
+                placeholder="Enter treatment description..."
               />
             </div>
 
@@ -207,9 +210,9 @@ export default function NewClinic({
 
               {/* Doctor image */}
               <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <div className="block text-sm font-medium text-gray-700 mb-2">
                   Doctor Photo (implement later)
-                </label>
+                </div>
                 <div className="flex items-center">
                   <div className="mr-4">
                     {formData.doctor_photo ? (
@@ -253,40 +256,34 @@ export default function NewClinic({
 
               {/* Docter Name */}
               <div className="mb-6">
-                <label
-                  htmlFor="doctor_name"
-                  className="block text-sm font-medium text-gray-700 mb-2"
-                >
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Doctor Name
+                  <input
+                    type="text"
+                    id="doctor_name"
+                    name="doctor_name"
+                    value={formData.doctor_name}
+                    onChange={handleChange}
+                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-teal-200 focus:border-teal-500"
+                    placeholder="Enter doctor's full name..."
+                  />
                 </label>
-                <input
-                  type="text"
-                  id="doctor_name"
-                  name="doctor_name"
-                  value={formData.doctor_name}
-                  onChange={handleChange}
-                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-teal-200 focus:border-teal-500"
-                  placeholder="Enter doctor's full name..."
-                />
               </div>
 
               {/* Doctor Position */}
               <div className="mb-2">
-                <label
-                  htmlFor="doctor_position"
-                  className="block text-sm font-medium text-gray-700 mb-2"
-                >
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Position
+                  <input
+                    type="text"
+                    id="doctor_role"
+                    name="doctor_role"
+                    value={formData.doctor_role}
+                    onChange={handleChange}
+                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-teal-200 focus:border-teal-500"
+                    placeholder="E.g. Cardiologist, Senior Surgeon..."
+                  />
                 </label>
-                <input
-                  type="text"
-                  id="doctor_role"
-                  name="doctor_role"
-                  value={formData.doctor_role}
-                  onChange={handleChange}
-                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-teal-200 focus:border-teal-500"
-                  placeholder="E.g. Cardiologist, Senior Surgeon..."
-                />
               </div>
             </div>
 
@@ -306,7 +303,7 @@ export default function NewClinic({
               </button>
               <button
                 type="submit"
-                className="px-6 py-1.5 bg-teal-600 text-white rounded-lg hover:bg-teal-700 font-stretch-semi-condensed font-semibold"
+                className="px-6 py-1.5 bg-teal-700 text-white rounded-lg hover:bg-teal-800 font-stretch-semi-condensed font-semibold"
               >
                 Submit
               </button>
