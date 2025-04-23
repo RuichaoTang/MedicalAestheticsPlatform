@@ -39,14 +39,14 @@ export default function HeaderSection() {
       </div>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
-          <h2 className="text-3xl font-semibold tracking-tight text-white/40 sm:text-5xl">
-            <span className="text-pretty font-serif font-medium text-5xl text-white/90 sm:text-7xl">
+          <h2 className="text-3xl font-semibold tracking-tight text-white/80 sm:text-5xl">
+            <span className="text-pretty font-serif font-medium text-5xl text-white sm:text-7xl">
               Hydrogen
             </span>
             <br />
             Medical Aesthetics Platform
           </h2>
-          <p className="mt-8 text-xl font-medium text-pretty text-gray-300 sm:text-xl/8">
+          <p className="mt-8 text-xl font-medium text-pretty text-white sm:text-xl/8">
             A one-stop solution where you can compare prices, browse procedure
             details, and make informed decisions with ease.
           </p>
@@ -61,8 +61,8 @@ export default function HeaderSection() {
           </div>
           <dl className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-4">
             {stats.map((stat) => (
-              <div key={stat.name} className="flex flex-col-reverse gap-1">
-                <dt className="text-base/7 text-gray-300">{stat.name}</dt>
+              <div key={stat.name} className="flex flex-col-reverse gap-1:">
+                <dt className="text-base/7 text-white">{stat.name}</dt>
                 <dd className="text-4xl font-semibold tracking-tight text-white">
                   {stat.value}
                 </dd>

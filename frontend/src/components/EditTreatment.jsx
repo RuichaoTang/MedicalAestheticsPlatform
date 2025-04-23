@@ -181,6 +181,9 @@ export default function NewClinic({
                     onChange={handleChange}
                     className="w-full p-3 border rounded-lg"
                     required
+                    min="0"
+                    step="0.01"
+                    placeholder="Enter price..."
                   />
                 </div>
               </div>
