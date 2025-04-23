@@ -20,6 +20,7 @@
   "homepage": "https://github.com/RuichaoTang/MedicalAestheticsPlatform#readme",
   "dependencies": {
     "bcryptjs": "^3.0.2",
+    "cloudinary": "^2.6.0",
     "cookie-parser": "^1.4.7",
     "dotenv": "^16.4.7",
     "jsonwebtoken": "^9.0.2",

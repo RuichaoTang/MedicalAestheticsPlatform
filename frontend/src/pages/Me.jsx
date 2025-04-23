@@ -14,11 +14,14 @@ export default function Me() {
 
   const navigate = useNavigate();
   const user = useAuth();
-  // console.log(user);
+  console.log(user);
 
   useEffect(() => {
     const fetchYourClinics = async () => {
       setLoading(true);
+      if (!user.user._id) {
+        return;
+      }
       try {
         const response = await fetch(
           `/api/clinics/clinicsByUser/${user.user._id}`
