@@ -47,33 +47,47 @@ export default function ClinicCard({ clinic }) {
             </Link>
           </h3>
           <div className="flex flex-row items-center text-xs">
-            <div className="basis-1/3 relative z-10  py-1.5 font-semibold text-slate-600 text-start">
+            <div
+              className="basis-1/3 relative z-10  py-1.5 font-semibold text-slate-600 text-start"
+              // aria-label="Clinic Location"
+              tabIndex="0"
+            >
               {clinic.clinic_location ? clinic.clinic_location : "N/A"}
             </div>
-            <div className="text-orange-700 font-semibold basis-1/3">
+            <div
+              className="text-orange-700 font-semibold basis-1/3"
+              tabIndex="0"
+            >
               Rating: {clinic.clinic_rating}
             </div>
-            <div className="text-gray-600 font-semibold basis-1/3 text-end">
+            <div
+              className="text-gray-600 font-semibold basis-1/3 text-end"
+              tabIndex="0"
+            >
               Sold: {formatNumber(clinic.clinic_sold)}
             </div>
           </div>
-          <p className="mt-2 line-clamp-3 text-sm/6 text-gray-600">
+          <p
+            className="mt-2 line-clamp-3 text-sm/6 text-gray-600"
+            aria-lable="Clinic Description"
+            tabIndex="0"
+          >
             {clinic.clinic_description}
           </p>
         </div>
         {featuredTreatment && (
           <div className="relative flex items-center gap-x-4 mt-3">
             <div className="text-sm/6">
-              <p className="font-semibold text-gray-900 font-stretch-semi-condensed">
+              <lable className="font-semibold text-gray-900 font-stretch-semi-condensed">
                 Featured Treatment:
-              </p>
-              <p className="font-semibold text-emerald-800">
-                <Link to={`/treatment/${featuredTreatment._id}`}>
-                  <span className="absolute inset-0" />
-                  {featuredTreatment.treatment_title} -{" "}
-                  {formatPrice(featuredTreatment.price)}
-                </Link>
-              </p>
+                <p className="font-semibold text-emerald-800">
+                  <Link to={`/treatment/${featuredTreatment._id}`}>
+                    <span className="absolute inset-0" />
+                    {featuredTreatment.treatment_title} -{" "}
+                    {formatPrice(featuredTreatment.price)}
+                  </Link>
+                </p>
+              </lable>
             </div>
           </div>
         )}

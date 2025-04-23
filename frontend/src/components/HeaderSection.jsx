@@ -1,7 +1,6 @@
 const links = [
   { name: "Search For Clinics", href: "/clinics" },
   { name: "Search For Treatments", href: "/treatments" },
-  { name: "Manage Clinic", href: "/me" },
 ];
 const stats = [
   { name: "Registered Specialists", value: "1400+" },
@@ -39,14 +38,20 @@ export default function HeaderSection() {
       </div>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
-          <h2 className="text-3xl font-semibold tracking-tight text-white/80 sm:text-5xl">
+          <h2
+            className="text-3xl font-semibold tracking-tight text-white/80 sm:text-5xl"
+            tabIndex="0"
+          >
             <span className="text-pretty font-serif font-medium text-5xl text-white sm:text-7xl">
               Hydrogen
             </span>
             <br />
             Medical Aesthetics Platform
           </h2>
-          <p className="mt-8 text-xl font-medium text-pretty text-white sm:text-xl/8">
+          <p
+            className="mt-8 text-xl font-medium text-pretty text-white sm:text-xl/8"
+            tabIndex="0"
+          >
             A one-stop solution where you can compare prices, browse procedure
             details, and make informed decisions with ease.
           </p>
@@ -58,6 +63,13 @@ export default function HeaderSection() {
                 {link.name} <span aria-hidden="true">&rarr;</span>
               </a>
             ))}
+            <a
+              key="Manage your clinics"
+              href={"/me"}
+              className=" bg-amber-200 hover:bg-amber-600 hover:text-white text-end sm:text-start rounded-4xl text-teal-800 px-3.5 transition-all "
+            >
+              Manage Your Clinics <span aria-hidden="true">&rarr;</span>
+            </a>
           </div>
           <dl className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 sm:grid-cols-2 lg:grid-cols-4">
             {stats.map((stat) => (

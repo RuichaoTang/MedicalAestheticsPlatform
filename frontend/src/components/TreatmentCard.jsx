@@ -16,13 +16,19 @@ export default function ClinicCard({ treatment }) {
             </Link>
           </h3>
           <div className="flex flex-row items-center text-xs">
-            <div className="text-slate-600 font-medium basis-1/3">
+            <div className="text-slate-600 font-medium basis-1/3" tabIndex="0">
               Price: {formatPrice(treatment.price)}
             </div>
-            <div className="basis-1/3 relative z-10 rounded-full px-3 py-1.5 font-semibold text-orange-700 ">
+            <div
+              className="basis-1/3 relative z-10 rounded-full px-3 py-1.5 font-semibold text-amber-700 "
+              tabIndex="0"
+            >
               Rating: {treatment.treatment_rating}
             </div>
-            <div className="text-gray-600 font-medium basis-1/3 text-end">
+            <div
+              className="text-gray-600 font-medium basis-1/3 text-end"
+              tabIndex="0"
+            >
               Sold: {formatNumber(treatment.treatment_sold)}
             </div>
           </div>
@@ -36,12 +42,14 @@ export default function ClinicCard({ treatment }) {
             src={treatment.doctor.doctor_picture_Url}
             className="size-10 rounded-full bg-gray-50"
           />
-          <div className="text-sm/6">
+          <div
+            className="text-sm/6"
+            tabIndex="0"
+            aria-label="Doctor's infomation"
+          >
             <p className="font-semibold text-gray-900">
-              <Link to={`/doctors/${treatment.doctor.doctor_id}`}>
-                <span className="absolute inset-0" />
-                {treatment.doctor.doctor_name}
-              </Link>
+              <span className="absolute inset-0" />
+              {treatment.doctor.doctor_name}
             </p>
             <p className="text-gray-600">
               {treatment.doctor.doctor_role} - {treatment.doctor.clinic_name}

@@ -93,7 +93,7 @@ export default function Treatments() {
               </svg>
               <input
                 type="text"
-                placeholder="Search..."
+                placeholder="Search for a treatment..."
                 className="w-full outline-none bg-transparent text-gray-700 placeholder-gray-400"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
