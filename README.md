@@ -6,15 +6,6 @@ It is a website aiming to offer transparent prices of medical aesthetic services
 ## Author 
 - Ruichao Tang
 
-## Class Link
-- https://johnguerra.co/classes/webDevelopment_spring_2025/
-
-## Usability Study Recording
-- https://youtu.be/8_AEPdJ0E4Q
-
-## Design Doc
-- https://github.com/RuichaoTang/MedicalAestheticsPlatform/blob/main/resources/Hydrogen%20-%20Design%20Doc.pdf
-
 ## Framework Used
 - Node.js
 - Express
@@ -56,6 +47,15 @@ npm run dev
 
 ## The Usability Report
 - https://docs.google.com/document/d/1OWbV4gzgnXB1Z11YhJveAGfjFSMqDCCKxz75p7ZRGhg/edit?usp=sharing
+
+## Usability Study Recording
+- https://youtu.be/8_AEPdJ0E4Q
+
+## Design Doc
+- https://github.com/RuichaoTang/MedicalAestheticsPlatform/blob/main/resources/Hydrogen%20-%20Design%20Doc.pdf
+
+## Class Link
+- https://johnguerra.co/classes/webDevelopment_spring_2025/
 
 ## Other Project Requirements
 - 1000+ user data implemented in mongoDB
