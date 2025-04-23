@@ -32,7 +32,7 @@ export default function ClinicCard({ treatment }) {
               Sold: {formatNumber(treatment.treatment_sold)}
             </div>
           </div>
-          <p className="mt-5 line-clamp-3 text-sm/6 text-gray-600">
+          <p className="mt-5 line-clamp-3 text-sm/6 text-gray-600" tabIndex="0">
             {treatment.treatment_description}
           </p>
         </div>
