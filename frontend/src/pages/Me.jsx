@@ -53,7 +53,7 @@ export default function Me() {
               <h1 className="text-3xl font-bold text-teal-700">
                 Hi! {user.user.firstName}.
               </h1>
-              <p className="font-serif text-xl sm:text-2xl">
+              <p className="font-mono text-lg sm:text-xl">
                 Manage Your Clinics here.
               </p>
             </div>
@@ -76,13 +76,13 @@ export default function Me() {
                 onClick={() => setActiveTab("clinics")}
                 className={`pb-4 px-1 border-b-2 font-medium text-sm ${
                   activeTab === "clinics"
-                    ? "border-emerald-500 text-emerald-600"
+                    ? "border-teal-700 text-teal-800"
                     : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
                 }`}
               >
                 My Clinics ({clinics.length})
               </button>
-              <button
+              {/* <button
                 onClick={() => setActiveTab("orders")}
                 className={`pb-4 px-1 border-b-2 font-medium text-sm ${
                   activeTab === "treatments"
@@ -90,8 +90,8 @@ export default function Me() {
                     : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
                 }`}
               >
-                {/* My History Orders ({orders.length}) */}
-              </button>
+               // My History Orders ({orders.length})
+              </button> */}
             </nav>
           </div>
 

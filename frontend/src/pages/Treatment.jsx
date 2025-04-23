@@ -1,7 +1,6 @@
 import Header from "../components/Header";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { formatPrice, formatNumber } from "../utils/utils.jsx";
-import Precaution from "../components/Precaution";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext.jsx";
 import EditTreatment from "../components/EditTreatment.jsx";
@@ -74,8 +73,8 @@ export default function Treatment() {
   return (
     <>
       <Header />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <article className="space-y-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 ">
+        <article className="space-y-12 pb-10">
           <div className="grid md:grid-cols-2 gap-6">
             {treatment.images?.map((img, index) => (
               <div
@@ -113,7 +112,7 @@ export default function Treatment() {
             <div className="flex justify-between items-center mb-6">
               <Link
                 to={`/clinic/${treatment.clinic}`}
-                className="flex items-center bg-white px-4 py-2 rounded-full shadow-sm border border-gray-100 hover:bg-gray-50 transition"
+                className="flex items-center bg-teal-50/50 px-4 py-2 rounded-full text-teal-800 font-semibold shadow-sm border border-gray-100 hover:bg-gray-50 transition"
               >
                 See Clinic Page
               </Link>
@@ -135,7 +134,7 @@ export default function Treatment() {
                 className="bg-teal-700 hover:bg-teal-800 text-white px-4 md:px-8  py-3 md:py-4 rounded-xl transition-all 
                 font-medium text-md md:text-lg shadow-md hover:shadow-teal-100 font-stretch-semi-condensed"
               >
-                Purchase
+                Purchase (coming soon...)
               </button>
             </div>
           </div>
@@ -171,7 +170,7 @@ export default function Treatment() {
                   <img
                     src={treatment.doctor.doctor_picture_Url}
                     alt={treatment.doctor.doctor_name}
-                    className="w-32 h-32 rounded-full object-cover mb-4 border-4 border-emerald-100"
+                    className="w-32 h-32 rounded-full object-cover mb-4 border-4 border-teal-700"
                   />
                   <h3 className="text-lg font-semibold mb-1 ">
                     {treatment.doctor.doctor_name}
@@ -191,19 +190,19 @@ export default function Treatment() {
           </div>
         </article>
 
-        <div className="my-6">
+        <div className="my-6 ">
           {treatment && user.user && user.user._id == treatment.owner && (
             <div className="">
               <div className="flex justify-center md:justify-start gap-4 mb-8">
                 <button
                   onClick={() => setIsEditing(!isEditing)}
-                  className="px-6 py-1.5 bg-teal-600 text-white rounded-lg hover:bg-teal-700 font-stretch-semi-condensed font-semibold"
+                  className="px-6 py-1.5 bg-teal-700 text-white rounded-lg hover:bg-teal-800 font-stretch-semi-condensed font-semibold"
                 >
                   {isEditing ? "Discard Changes" : "Edit Treatment"}
                 </button>
                 <button
                   onClick={handleDelete}
-                  className="px-6 py-1.5 bg-orange-600 text-white rounded-lg hover:bg-orange-700 font-stretch-semi-condensed font-semibold"
+                  className="px-6 py-1.5 bg-orange-700 text-white rounded-lg hover:bg-orange-800 font-stretch-semi-condensed font-semibold"
                 >
                   Delete Treatment
                 </button>
@@ -219,7 +218,6 @@ export default function Treatment() {
             />
           )}
         </div>
-        <Precaution />
       </div>
     </>
   );

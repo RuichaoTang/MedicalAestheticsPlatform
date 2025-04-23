@@ -6,9 +6,9 @@ export default function ClinicCard({ treatment }) {
     <>
       <article
         key={treatment._id}
-        className="flex max-w-xl flex-col items-start justify-between"
+        className="flex max-w-xl flex-col items-start justify-between bg-white shadow-xs rounded-lg px-5 pb-3"
       >
-        <div className="group relative">
+        <div className="group relative bg-white">
           <h3 className="mt-3 text-lg/6 font-medium text-gray-900 group-hover:text-gray-600 font-serif">
             <Link to={`/treatment/${treatment._id}`}>
               <span className="font-serif" />
@@ -19,7 +19,7 @@ export default function ClinicCard({ treatment }) {
             <div className="text-slate-600 font-medium basis-1/3">
               Price: {formatPrice(treatment.price)}
             </div>
-            <div className="basis-1/3 relative z-10 rounded-full px-3 py-1.5 font-semibold text-orange-600 ">
+            <div className="basis-1/3 relative z-10 rounded-full px-3 py-1.5 font-semibold text-orange-700 ">
               Rating: {treatment.treatment_rating}
             </div>
             <div className="text-gray-600 font-medium basis-1/3 text-end">
