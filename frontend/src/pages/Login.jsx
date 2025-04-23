@@ -42,7 +42,7 @@ export default function Login() {
       }
       dispatch({ type: "LOGIN_SUCCESS", payload: data.user });
       setLoading(false);
-      navigate("/");
+      navigate("/me");
     } catch (error) {
       dispatch({ type: "AUTH_ERROR" });
       setError(error.message);

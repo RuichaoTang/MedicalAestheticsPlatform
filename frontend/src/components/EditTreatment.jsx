@@ -1,7 +1,6 @@
 // import Header from "../components/Header";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-// import { formatPrice } from "../utils/utils";
 import { useAuth } from "../context/AuthContext";
 import PropTypes from "prop-types";
 
@@ -30,9 +29,9 @@ export default function NewClinic({
     owner: user.user._id,
     doctor: {
       doctor_id: 1,
-      doctor_name: "Coming Soon...",
-      clinic_name: "Doctor-related functionalities",
-      doctor_role: "Coming Soon...",
+      doctor_name: "",
+      clinic_name: "",
+      doctor_role: "",
       doctor_picture_Url:
         "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
     },
@@ -64,16 +63,28 @@ export default function NewClinic({
 
   useEffect(() => {
     console.log("formdata", formData);
-    // console.log("user", user);
   }, [formData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-    // }
+
+    // Update doctor object
+    if (name.startsWith("doctor_")) {
+      setFormData((prev) => ({
+        ...prev,
+        doctor: {
+          ...prev.doctor,
+          [name]: value,
+        },
+      }));
+    }
+    // update other info
+    else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -125,6 +136,9 @@ export default function NewClinic({
         setError(err.message);
       }
     }
+  };
+  const handleImageUpload = () => {
+    return; // implemtent later
   };
 
   if (loading) return <div>Loading...</div>;
@@ -183,6 +197,97 @@ export default function NewClinic({
                 className="w-full p-3 border rounded-lg h-48"
                 placeholder="Enter clinic description..."
               />
+            </div>
+
+            {/* image upload here */}
+            <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+              <h2 className="text-2xl font-semibold mb-6 font-stretch-ultra-condensed text-teal-900">
+                Doctor Information
+              </h2>
+
+              {/* Doctor image */}
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Doctor Photo (implement later)
+                </label>
+                <div className="flex items-center">
+                  <div className="mr-4">
+                    {formData.doctor_photo ? (
+                      <img
+                        src={formData.doctor_photo}
+                        alt="Doctor"
+                        className="w-20 h-20 rounded-full object-cover border-2 border-teal-100"
+                      />
+                    ) : (
+                      <div className="w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center">
+                        <svg
+                          className="w-8 h-8 text-gray-400"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                          />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                  <label className="cursor-pointer">
+                    <span className="px-4 py-2 bg-teal-50 text-teal-700 rounded-lg hover:bg-teal-100 transition-colors border border-teal-200">
+                      Upload Photo
+                    </span>
+                    <input
+                      type="file"
+                      name="doctor_photo"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      className="hidden"
+                    />
+                  </label>
+                </div>
+              </div>
+
+              {/* Docter Name */}
+              <div className="mb-6">
+                <label
+                  htmlFor="doctor_name"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
+                  Doctor Name
+                </label>
+                <input
+                  type="text"
+                  id="doctor_name"
+                  name="doctor_name"
+                  value={formData.doctor_name}
+                  onChange={handleChange}
+                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-teal-200 focus:border-teal-500"
+                  placeholder="Enter doctor's full name..."
+                />
+              </div>
+
+              {/* Doctor Position */}
+              <div className="mb-2">
+                <label
+                  htmlFor="doctor_position"
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                >
+                  Position
+                </label>
+                <input
+                  type="text"
+                  id="doctor_role"
+                  name="doctor_role"
+                  value={formData.doctor_role}
+                  onChange={handleChange}
+                  className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-teal-200 focus:border-teal-500"
+                  placeholder="E.g. Cardiologist, Senior Surgeon..."
+                />
+              </div>
             </div>
 
             <div className="flex justify-end gap-4 mt-8">

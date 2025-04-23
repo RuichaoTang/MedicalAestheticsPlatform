@@ -1,7 +1,7 @@
 const links = [
   { name: "Search For Clinics", href: "/clinics" },
   { name: "Search For Treatments", href: "/treatments" },
-  { name: "Our Team", href: "/about" },
+  { name: "Manage Clinic", href: "/me" },
 ];
 const stats = [
   { name: "Registered Specialists", value: "1400+" },

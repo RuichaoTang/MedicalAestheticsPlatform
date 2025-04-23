@@ -178,12 +178,12 @@ export default function Treatment() {
                   </h3>
                   <p className="text-gray-600 mb-2">
                     {treatment.doctor.doctor_role}
-                    <Link to={`/clinics/${treatment.doctor.clinicId}`}>
+                    {/* <Link to={`/clinics/${treatment.doctor.clinicId}`}>
                       <span className="text-gray-700 font-normal hover:text-emerald-900 transition-colors">
                         {" "}
                         - {treatment.doctor.clinic_name}
                       </span>
-                    </Link>
+                    </Link> */}
                   </p>
                 </div>
               </section>
