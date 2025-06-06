@@ -44,6 +44,9 @@ npm run dev
 ```
 -Note that .env file is not uploaded
 
+## Slides
+- https://docs.google.com/presentation/d/1w4ILwdV-MnVhlsul3Gidn9vdrsWgPX-7Xoniq0g5n7k/edit?slide=id.g3435337d10f_0_31#slide=id.g3435337d10f_0_31
+
 
 ## The Usability Report
 - https://docs.google.com/document/d/1OWbV4gzgnXB1Z11YhJveAGfjFSMqDCCKxz75p7ZRGhg/edit?usp=sharing
